@@ -59,44 +59,43 @@ export default function Home() {
                 <th className="p-2 pt-[20px] pb-[20px] rounded-r-xl w-[200px]">จัดการ</th>
               </tr>
             </thead>
-            <tbody>
-              {field.length === 0 ? (
+
+            {field.length === 0 ? (
+              <tbody>
                 <tr>
                   <td colSpan={11} className="text-center text-black p-[10px] bg-gray-50">
                     ไม่มีข้อมูล
                   </td>
                 </tr>
-              ) : (
-                <div>
-                  {field.map((field, index) => (
-                    <tr key={index} className="odd:bg-white even:bg-gray-50 border-b border-gray-200">
-                      <td className=""></td>
-                      <td className="">{field.hn_wife}</td>
-                      <td className="">{field.name_wife}</td>
-                      <td className="">{field.age_wife}</td>
-                      <td className="">{field.tel_wife}</td>
-                      <td className="">{field.occupation_wife}</td>
-                      <td className="p-4">
-                        <div className=" flex items-center gap-[10px] justify-center">
-                          <Link
-                            href={`/view`}
-                            className="bg-gray-200 hover:bg-gray-300 p-1 pr-[20px] pl-[20px] rounded-lg">
-                            ดู
-                          </Link>
-                          <Link
-                            href={`/edit`}
-                            className="bg-[#ffc107] hover:bg-[#f0b400] p-1 pr-[20px] pl-[20px] rounded-lg">
-                            เเก้ไข
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </div>
-              )}
-
-
-            </tbody>
+              </tbody>
+            ) : (
+              <tbody>
+                {field.map((field, index) => (
+                  <tr key={index} className="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+                    <td className="p-2">{field.anc_no}</td>
+                    <td className="p-2">{field.hn_wife}</td>
+                    <td className="p-2">{field.name_wife}</td>
+                    <td className="p-2">{field.age_wife}</td>
+                    <td className="p-2">{field.tel_wife}</td>
+                    <td className="p-2">{field.occupation_wife}</td>
+                    <td className="p-2">
+                      <div className=" flex items-center gap-[10px] justify-center">
+                        <Link
+                          href={`/view`}
+                          className="bg-gray-200 hover:bg-gray-300 p-1 pr-[20px] pl-[20px] rounded-lg">
+                          ดู
+                        </Link>
+                        <Link
+                          href={`/edit`}
+                          className="bg-[#ffc107] hover:bg-[#f0b400] p-1 pr-[20px] pl-[20px] rounded-lg">
+                          เเก้ไข
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
           </table>
         </div>
       </div>

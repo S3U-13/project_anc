@@ -1,6 +1,7 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
+import Swal from 'sweetalert2';
 
 export default function useHook() {
     const [field, setField] = useState({
@@ -320,24 +321,161 @@ export default function useHook() {
 
     const router = useRouter();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setField((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // mock เก็บ localStorage
-        const existing = JSON.parse(localStorage.getItem("mockData")) || [];
-        const newData = [...existing, field];
-        localStorage.setItem("mockData", JSON.stringify(newData));
+        let existing = JSON.parse(localStorage.getItem("mockData")) || [];
 
-        router.push("/");
+        // ✅ สร้าง anc_no 6 หลักอัตโนมัติ
+        let nextNo = "000001";
+        if (existing.length > 0) {
+            const lastNo = existing[existing.length - 1].anc_no;
+            const newNo = (parseInt(lastNo, 10) + 1).toString().padStart(6, "0");
+            nextNo = newNo;
+        }
+
+        const newData = {
+            ...field,      // ฟิลด์ที่กรอกจากฟอร์ม
+            anc_no: nextNo // หมายเลข anc_no
+        };
+
+        try {
+            if (newData) {
+                const updatedData = [...existing, newData];
+                localStorage.setItem("mockData", JSON.stringify(updatedData));
+
+                Swal.fire({
+                    icon: "success",
+                    text: "เพิ่มข้อมูลสำเร็จ",
+                });
+
+                router.push("/");
+            } else {
+                Swal.fire({
+                    icon: "warning",
+                    text: "เพิ่มข้อมูลไม่สำเร็จ",
+                });
+            }
+        } catch (error) {
+            console.error(error);
+            Swal.fire({
+                icon: "error",
+                text: "เกิดข้อผิดพลาด",
+            });
+        }
     };
+
+    const [pat, setPat] = useState([
+        {
+            hn: "1345798",
+            first_name: "นาง สมใจ",
+            last_name: "สาสม",
+            age: "26",
+            id_card: "4567892134567",
+            address: "1/6 ม.9 ต.ทับไทร อ.โป่งน้ำร้อน จ.จันทบุรี",
+            tel: "0945301245",
+            occupation: "ครู",
+            email: "somjai@gmail.com",
+            weight: "50",
+            height: "160",
+            bp_systolic: "120",
+            bp_diastolic: "80",
+        },
+        {
+            hn: "2345671",
+            first_name: "นาง ใจดี",
+            last_name: "มีสุข",
+            age: "29",
+            id_card: "9854623167598",
+            address: "6/1 ม.8 ต.วัดใหม่ อ.เมือง จ.จันทบุรี",
+            tel: "0974561065",
+            occupation: "ขายอาหารตามสั่ง",
+            email: "jaidee@gmail.com",
+            weight: "60",
+            height: "160",
+            bp_systolic: "110",
+            bp_diastolic: "80",
+        },
+        {
+            hn: "4512348",
+            first_name: "นาง ชูใจ",
+            last_name: "ชูสี",
+            age: "23",
+            id_card: "65245316844452",
+            address: "1/1 ม.4 ต.วัดใหม่ อ.เมือง จ.จันทบุรี",
+            tel: "0675642315",
+            occupation: "ขายของ",
+            email: "chujai@gmail.com",
+            weight: "55",
+            height: "167",
+            bp_systolic: "120",
+            bp_diastolic: "79",
+        },
+    ]);
+
+    const [hnInput, setHnInput] = useState("");
+
+
+    const handleSearch = () => {
+        const found = pat.find((p) => p.hn === hnInput);
+        if (found) {
+            setField((prev) => ({
+                ...prev,
+                hn_wife: found.hn || "",
+                name_wife: `${found.first_name} ${found.last_name}` || "",
+                age_wife: found.age || "",
+                id_card_wife: found.id_card || "",
+                tel_wife: found.tel || "",
+                address: found.address || "",
+                occupation_wife: found.occupation || "",
+                email_wife: found.email || "",
+                weight_wife: found.weight || "",
+                height_wife: found.height || "",
+                bp_systolic: found.bp_systolic || "",
+                bp_diastolic: found.bp_diastolic || "",
+            }));
+        } else {
+            alert("ไม่พบข้อมูล");
+            setField({
+                hn_wife: "",
+                name_wife: "",
+                age_wife: "",
+                id_card_wife: "",
+                tel_wife: "",
+                address: "",
+                occupation_wife: "",
+                email_wife: "",
+                weight_wife: "",
+                height_wife: "",
+                bp_systolic: "",
+                bp_diastolic: "",
+            });
+        }
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setField((prev) => {
+            const newField = { ...prev, [name]: value };
+
+            // คำนวณ bmi_wife อัตโนมัติ ถ้า weight_wife และ height_wife มีค่า
+            const weight = parseFloat(newField.weight_wife);
+            const heightCm = parseFloat(newField.height_wife);
+
+            if (weight && heightCm) {
+                const heightM = heightCm / 100;
+                newField.bmi_wife = (weight / (heightM * heightM)).toFixed(2); // ปัด 2 ตำแหน่ง
+            } else {
+                newField.bmi_wife = ""; // ล้างค่า BMI ถ้า weight หรือ height ว่าง
+            }
+
+            return newField;
+        });
+    };
+
     return {
         field,
         setField,
@@ -361,5 +499,8 @@ export default function useHook() {
         vip,
         ga,
         RgAbTr,
+        hnInput,
+        setHnInput,
+        handleSearch,
     }
 }

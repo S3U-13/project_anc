@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import useHook from './useHook';
 
 export default function page() {
-    const { field, handleChange, handleSubmit, router, setField, BE, BEside, FwdRefChoice, HDA, HR, PG, amnio, cordo, pcr, duringPregnancy, prenatalCare, receivedMedicine, refChoice, relationship, RgAbTr, vip, ga } = useHook();
+    const { field, handleChange, handleSubmit, router, setField, BE, BEside, FwdRefChoice, HDA, HR, PG, amnio, cordo, pcr, duringPregnancy, prenatalCare, receivedMedicine, refChoice, relationship, RgAbTr, vip, ga, hnInput, handleSearch, setHnInput, } = useHook();
 
     return (
         <div className='min-h-screen bg-[#f0ebf8] pt-[40px]'>
@@ -19,8 +19,8 @@ export default function page() {
                     <div className='bg-white rounded-lg pr-[20px] pl-[20px] shadow-lg xl:pr-[60px] xl:pl-[60px] pt-[30px] pb-[30px]'>
                         <div className='flex md:flex md:justify-end'>
                             <fieldset>
-                                <input className='border-gray-400 border bg-white p-2 rounded-lg mr-[5px]' type="text" placeholder='กรุณากรอกรหัส HN หรือ หมายเลขบัตรประชาชน หรือ ชื่อ' />
-                                <button className='bg-[#683cb4] hover:bg-[#4a2d7c] text-white p-1 rounded-lg' type='button'>ค้นหา</button>
+                                <input className='border-gray-400 border bg-white p-2 rounded-lg mr-[5px]' value={hnInput} onChange={(e) => setHnInput(e.target.value)} type="text" placeholder='กรุณากรอกรหัส HN หรือ หมายเลขบัตรประชาชน หรือ ชื่อ' />
+                                <button className='bg-[#683cb4] hover:bg-[#4a2d7c] text-white p-1 rounded-lg' onClick={handleSearch} type='button'>ค้นหา</button>
                             </fieldset>
                         </div>
                         <div className='mt-[20px] bg-gray-100 border-gray-400 border-t-2 p-[10px] pt-[20px] pb-[20px] xl:p-[20px] rounded-b-lg '>
@@ -29,7 +29,7 @@ export default function page() {
                                     <label htmlFor="">HN:</label>
                                     <input className='w-full border-gray-400 border p-1 ml-[5px] md:w-[300px] xl:w-[238px] rounded-lg bg-white'
                                         name='hn_wife'
-                                        value={field.hn_wife}
+                                        value={field?.hn_wife || ""}
                                         onChange={handleChange}
                                         type="text"
                                         placeholder='กรุณากรอกรหัส HN' />
@@ -38,7 +38,7 @@ export default function page() {
                                     <label htmlFor="">ชื่อ-นามสกุล:</label>
                                     <input className='w-full border-gray-400 border p-1 ml-[5px] rounded-lg md:w-[350px] lg:w-[450px] xl:w-[400px] bg-white'
                                         name='name_wife'
-                                        value={field.name_wife}
+                                        value={field?.name_wife}
                                         onChange={handleChange}
                                         type="text"
                                         placeholder='กรุณากรอก ชื่อ-นามสกุล' />
@@ -49,7 +49,7 @@ export default function page() {
                                     <label htmlFor="">อายุ:</label>
                                     <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[100px] bg-white text-center'
                                         name='age_wife'
-                                        value={field.age_wife}
+                                        value={field?.age_wife || ""}
                                         onChange={handleChange}
                                         type="number"
                                         min="0"
@@ -60,7 +60,7 @@ export default function page() {
                                     <label htmlFor="">หมายเลขบัตรประชาชน:</label>
                                     <input className='w-full border-gray-400 border p-1 ml-[5px] rounded-lg md:w-[299px] lg:w-[350px] xl:w-[450px] bg-white'
                                         name='id_card_wife'
-                                        value={field.id_card_wife}
+                                        value={field?.id_card_wife || ""}
                                         onChange={handleChange}
                                         type="text"
                                         placeholder='กรุณากรอกหมายเลขบัตรประชาชน' />
@@ -70,7 +70,7 @@ export default function page() {
                                 <label className='w-[40px] mt-[5px]' htmlFor="">ที่อยู่:</label>
                                 <textarea className='border-gray-400 border p-1 w-full rounded-lg h-[120px] bg-white'
                                     name='address'
-                                    value={field.address}
+                                    value={field?.address || ""}
                                     onChange={handleChange}
                                     placeholder='กรุณากรอกที่อยู่'></textarea>
                             </div>
@@ -79,7 +79,7 @@ export default function page() {
                                     <label htmlFor="">เบอร์โทรที่ติดต่อได้:</label>
                                     <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full md:w-[250px] lg:w-[250px] xl:w-[264px] bg-white'
                                         name='tel_wife'
-                                        value={field.tel_wife}
+                                        value={field?.tel_wife || ""}
                                         onChange={handleChange}
                                         type="text"
                                         placeholder='กรุณากรอกเบอร์โทรที่ติดต่อได้' />
@@ -88,7 +88,7 @@ export default function page() {
                                     <label htmlFor="">อาชีพ:</label>
                                     <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full md:w-[350px] xl:w-[314px] bg-white'
                                         name='occupation_wife'
-                                        value={field.occupation_wife}
+                                        value={field?.occupation_wife || ""}
                                         onChange={handleChange}
                                         type="text"
                                         placeholder='กรุณากรอกอาชีพ' />
@@ -98,7 +98,7 @@ export default function page() {
                                 <label className='w-[55px]' htmlFor="">E-mail:</label>
                                 <input className='w-full border-gray-400 border p-1 ml-[5px] rounded-lg md:w-[400px] lg:w-[500px] xl:w-full  bg-white'
                                     name='email_wife'
-                                    value={field.email_wife}
+                                    value={field?.email_wife || ""}
                                     onChange={handleChange}
                                     type="text"
                                     placeholder='กรุณากรอกอีเมล' />
@@ -108,7 +108,7 @@ export default function page() {
                                     <label htmlFor="">น้ำหนัก:</label>
                                     <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[50px] bg-white mr-[5px] text-center'
                                         name='weight_wife'
-                                        value={field.weight_wife}
+                                        value={field?.weight_wife || ""}
                                         onChange={handleChange}
                                         type="number" placeholder='หนัก' />
                                     <span>กก.</span>
@@ -117,17 +117,17 @@ export default function page() {
                                     <label htmlFor="">ส่วนสูง:</label>
                                     <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[50px] bg-white mr-[5px] text-center'
                                         name='height_wife'
-                                        value={field.height_wife}
+                                        value={field?.height_wife || ""}
                                         onChange={handleChange}
                                         type="number" placeholder='สูง' />
                                     <span>ซม.</span>
                                 </div>
                                 <div>
                                     <label htmlFor="">BMI:</label>
-                                    <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[50px] bg-white mr-[5px] text-center'
+                                    <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[80px] bg-white mr-[5px] text-center'
                                         name='bmi_wife'
                                         value={field.bmi_wife}
-                                        onChange={handleChange}
+                                        readOnly
                                         type="number" placeholder='BMI' />
                                     <span>กก.</span>
                                 </div>
@@ -142,7 +142,7 @@ export default function page() {
                                         value={field.bp_diastolic}
                                         onChange={handleChange} />
                                     <div className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[80px] bg-white mr-[5px] text-center'>
-                                        /
+                                        {field.bp_systolic}/{field.bp_diastolic}
                                     </div>
                                     <span>มล./ปรอท</span>
                                 </div>
@@ -818,6 +818,9 @@ export default function page() {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className='mt-[20px]'>
+                        <button type="submit" className='w-full bg-[#68449c] hover:bg-[#6337a0] p-2 text-white text-md rounded-sm'>บันทึกข้อมูล</button>
                     </div>
                 </div>
             </form >

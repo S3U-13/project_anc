@@ -37,7 +37,9 @@ export default function Navbar() {
                         <button
                             type="button"
                             onClick={toggleDropdown}>
-                            <img className='w-full h-full' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY5sUwOBtyldO-ElBtOZY0wn8mhO3IebI2fHPSBfS6Tw2VZ1lFYP2IJMHe2WbniQrqdP8&usqp=CAU" alt="" />
+                            <div className='w-[50px] h-[50px] rounded-full bg-[#c4a6f7] overflow-hidden'>
+                                <img className='w-full h-full' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY5sUwOBtyldO-ElBtOZY0wn8mhO3IebI2fHPSBfS6Tw2VZ1lFYP2IJMHe2WbniQrqdP8&usqp=CAU" alt="" />
+                            </div>
                         </button>
                         {isOpen && (
                             <div className="absolute mt-2 w-[150px] bg-white rounded shadow-lg right-[10px]">
