@@ -1,103 +1,105 @@
+'use client';
 import Image from "next/image";
+import Navbar from "./components/navbar";
+import Link from 'next/link';
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login"); // ถ้าไม่มี token → กลับไป login
+    }
+  }, [router]);
+
+  // const Data = [1];
+
+  const [field, setField] = useState([]);
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("mockData")) || [];
+    setField(stored);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#f0ebf8] p-[10px]">
+      <Navbar />
+
+      <div className='pt-[10px] bg-[#683cb4] mx-auto rounded-lg w-[1600px] mt-[40px]'>
+        <div className='bg-white pt-[30px] pb-[30px]'>
+          <h1 className='text-center text-2xl sm:text-3xl'>หน้าหลัก</h1>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <div className="p-[20px] w-[1600px] bg-white rounded-xl shadow-lg mx-auto mt-[20px]">
+        {/* <div className="relative ...">
+          <div className="pointer-events-auto absolute ...">
+            <svg className="absolute h-5 w-5 text-gray-400">
+            </svg>
+          </div>
+          <input type="text" placeholder="Search" className="border-gray-400 border rounded-lg p-1" />
+        </div> */}
+        <div className="mb-[10px] mt-[10px] flex justify-end mr-[10px]">
+          <a className="bg-[#683cb4] hover:bg-[#492880] p-2 text-white rounded-lg" href="/create">เพิ่มข้อมูล</a>
+        </div>
+
+        <div className="">
+          <table className="w-full">
+            <thead>
+              <tr className="bg-[#c4a6f7] pt-[10px]">
+                <th className="p-2 pt-[20px] pb-[20px] rounded-l-xl w-[200px] text-left">ANC No:</th>
+                <th className="p-2 pt-[20px] pb-[20px] w-[200px] text-left">HN:</th>
+                <th className="p-2 pt-[20px] pb-[20px] w-[300px] text-left">ชื่อ:</th>
+                <th className="p-2 pt-[20px] pb-[20px]">อายุ:</th>
+                <th className="p-2 pt-[20px] pb-[20px]">เบอร์โทรศัพท์:</th>
+                <th className="p-2 pt-[20px] pb-[20px]">อาชีพ:</th>
+                <th className="p-2 pt-[20px] pb-[20px] rounded-r-xl w-[200px]">จัดการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {field.length === 0 ? (
+                <tr>
+                  <td colSpan={11} className="text-center text-black p-[10px] bg-gray-50">
+                    ไม่มีข้อมูล
+                  </td>
+                </tr>
+              ) : (
+                <div>
+                  {field.map((field, index) => (
+                    <tr key={index} className="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+                      <td className=""></td>
+                      <td className="">{field.hn_wife}</td>
+                      <td className="">{field.name_wife}</td>
+                      <td className="">{field.age_wife}</td>
+                      <td className="">{field.tel_wife}</td>
+                      <td className="">{field.occupation_wife}</td>
+                      <td className="p-4">
+                        <div className=" flex items-center gap-[10px] justify-center">
+                          <Link
+                            href={`/view`}
+                            className="bg-gray-200 hover:bg-gray-300 p-1 pr-[20px] pl-[20px] rounded-lg">
+                            ดู
+                          </Link>
+                          <Link
+                            href={`/edit`}
+                            className="bg-[#ffc107] hover:bg-[#f0b400] p-1 pr-[20px] pl-[20px] rounded-lg">
+                            เเก้ไข
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </div>
+              )}
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
