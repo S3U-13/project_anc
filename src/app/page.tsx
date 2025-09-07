@@ -50,20 +50,20 @@ export default function Home() {
           <table className="w-full">
             <thead>
               <tr className="bg-[#c4a6f7] pt-[10px]">
-                <th className="p-2 pt-[20px] pb-[20px] rounded-l-xl w-[200px] text-left">ANC No:</th>
-                <th className="p-2 pt-[20px] pb-[20px] w-[200px] text-left">HN:</th>
-                <th className="p-2 pt-[20px] pb-[20px] w-[300px] text-left">ชื่อ:</th>
-                <th className="p-2 pt-[20px] pb-[20px]">อายุ:</th>
-                <th className="p-2 pt-[20px] pb-[20px]">เบอร์โทรศัพท์:</th>
-                <th className="p-2 pt-[20px] pb-[20px]">อาชีพ:</th>
-                <th className="p-2 pt-[20px] pb-[20px] rounded-r-xl w-[200px]">จัดการ</th>
+                <th className="p-6 pt-[25px] pb-[25px] rounded-l-xl w-[200px] text-left ">ANC No:</th>
+                <th className="p-2 pt-[25px] pb-[25px] w-[200px] text-left">HN:</th>
+                <th className="p-2 pt-[25px] pb-[25px] w-[300px] text-left">ชื่อ:</th>
+                <th className="p-2 pt-[25px] pb-[25px] text-left">อายุ:</th>
+                <th className="p-2 pt-[25px] pb-[25px] text-left">เบอร์โทรศัพท์:</th>
+                <th className="p-2 pt-[25px] pb-[25px] text-left">อาชีพ:</th>
+                <th className="p-2 pt-[25px] pb-[25px] rounded-r-xl w-[200px]">จัดการ</th>
               </tr>
             </thead>
 
             {field.length === 0 ? (
               <tbody>
                 <tr>
-                  <td colSpan={11} className="text-center text-black p-[10px] bg-gray-50">
+                  <td colSpan={11} className="text-center text-black p-6 bg-gray-50 rounded-xl">
                     ไม่มีข้อมูล
                   </td>
                 </tr>
@@ -71,14 +71,14 @@ export default function Home() {
             ) : (
               <tbody>
                 {field.map((field, index) => (
-                  <tr key={index} className="odd:bg-white even:bg-gray-50 border-b border-gray-200">
-                    <td className="p-2">{field.anc_no}</td>
+                  <tr key={index} className="odd:bg-gray-50 even:bg-gray-100">
+                    <td className="p-6 rounded-l-xl">{field.anc_no}</td>
                     <td className="p-2">{field.hn_wife}</td>
                     <td className="p-2">{field.name_wife}</td>
                     <td className="p-2">{field.age_wife}</td>
                     <td className="p-2">{field.tel_wife}</td>
                     <td className="p-2">{field.occupation_wife}</td>
-                    <td className="p-2">
+                    <td className="p-2  rounded-r-xl">
                       <div className=" flex items-center gap-[10px] justify-center">
                         <Link
                           href={`/view`}

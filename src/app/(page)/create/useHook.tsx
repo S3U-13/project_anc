@@ -321,7 +321,7 @@ export default function useHook() {
 
     const router = useRouter();
 
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -455,25 +455,26 @@ export default function useHook() {
         }
     };
 
+
+    useEffect(() => {
+        const weight = parseFloat(field.weight_wife);
+        const heightCm = parseFloat(field.height_wife);
+
+        if (weight && heightCm) {
+            const heightM = heightCm / 100;
+            setField((prev) => ({
+                ...prev,
+                bmi_wife: (weight / (heightM * heightM)).toFixed(2),
+            }));
+        }
+    }, [field.weight_wife, field.height_wife]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-
-        setField((prev) => {
-            const newField = { ...prev, [name]: value };
-
-            // คำนวณ bmi_wife อัตโนมัติ ถ้า weight_wife และ height_wife มีค่า
-            const weight = parseFloat(newField.weight_wife);
-            const heightCm = parseFloat(newField.height_wife);
-
-            if (weight && heightCm) {
-                const heightM = heightCm / 100;
-                newField.bmi_wife = (weight / (heightM * heightM)).toFixed(2); // ปัด 2 ตำแหน่ง
-            } else {
-                newField.bmi_wife = ""; // ล้างค่า BMI ถ้า weight หรือ height ว่าง
-            }
-
-            return newField;
-        });
+        setField((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
     };
 
     return {
