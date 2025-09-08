@@ -12,21 +12,30 @@ export default function PartTwo() {
                     </div>
                     <div className='mt-[10px] pl-[10px]'>
                         {HDA.map((hda) => (
-                            <div key={hda.id}>
-                                <input className='mr-[5px]' name='HDA' value={hda.id} type="radio" />
+                            <div key={hda.id} className='xl:flex xl:items-center'>
+                                <input className='mr-[5px]'
+                                    name='HDA'
+                                    value={hda.id}
+                                    checked={field.HDA === String(hda.id)}
+                                    onChange={handleChange}
+                                    type="radio" />
                                 <label className='mr-[10px]'>{hda.hda_name}</label>
+                                {String(hda.id) === "1" && field.HDA === "1" && (
+                                    <div>
+                                        <label htmlFor="">ชื่อยาที่เคยเเพ้:</label>
+                                        <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full lg:w-[507px] xl:w-[460px] bg-white mr-[5px]'
+                                            name='DA'
+                                            value={field.DA}
+                                            onChange={handleChange}
+                                            type="text"
+                                            placeholder='กรุณากรอกชื่อยาที่เคยเเพ้' />
+                                    </div>
+                                )}
                             </div>
                         ))}
+
                     </div>
-                    <div>
-                        <label htmlFor="">ชื่อยาที่เคยเเพ้:</label>
-                        <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full lg:w-[507px] xl:w-[460px] bg-white mr-[5px]'
-                            name='DA'
-                            value={field.DA}
-                            onChange={handleChange}
-                            type="text"
-                            placeholder='กรุณากรอกชื่อยาที่เคยเเพ้' />
-                    </div>
+
                 </div>
 
 
@@ -36,19 +45,28 @@ export default function PartTwo() {
                     </div>
                     <div className='mt-[10px] pl-[10px]'>
                         {HR.map((hr) => (
-                            <div key={hr.id}>
+                            <div key={hr.id} className='xl:flex xl:items-center'>
                                 <input className='mr-[5px]'
                                     name='HR'
                                     value={hr.id}
                                     onChange={handleChange}
+                                    checked={field.HR === String(hr.id)}
                                     type="radio" />
                                 <label className='mr-[10px]' htmlFor="HR">{hr.hr_name}</label>
+                                {String(hr.id) === "2" && field.HR === "2" && (
+                                    <div>
+                                        <label htmlFor="">ระบุ:</label>
+                                        <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full lg:w-[580px] xl:w-[570px] bg-white'
+                                            name=''
+                                            value={field.HR_other}
+                                            onChange={handleChange}
+                                            type="text"
+                                            placeholder='กรุณาระบุ' />
+                                    </div>
+                                )}
                             </div>
                         ))}
-                        <div>
-                            <label htmlFor="">ระบุ:</label>
-                            <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full lg:w-[580px] xl:w-[570px] bg-white' type="text" placeholder='กรุณาระบุ' />
-                        </div>
+
                     </div>
                 </div>
 
@@ -219,20 +237,28 @@ export default function PartTwo() {
                         <label className='text-xl' htmlFor="">PCR</label>
                     </div>
                     <div className='pl-[10px] mt-[10px]'>
-                        {pcr.map((pcr) => (
-                            <div key={pcr.id}>
-                                <input type="radio" name='pcr' value={pcr.id} />
-                                <label htmlFor="pcr">{pcr.pcr_name}</label>
+                        {pcr.map((Pcr) => (
+                            <div key={Pcr.id} className='xl:flex xl:items-center'>
+                                <input
+                                    type="radio"
+                                    name='pcr'
+                                    value={Pcr.id}
+                                    onChange={handleChange}
+                                    checked={field.pcr === String(Pcr.id)}
+                                />
+                                <label className='mr-[10px]' htmlFor="pcr">{Pcr.pcr_name}</label>
+                                {String(Pcr.id) === "2" && field.pcr === "2" && (
+                                    <div>
+                                        <label htmlFor="">ระบุ</label>
+                                        <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
+                                            name='pcr_other'
+                                            value={field.pcr_other}
+                                            onChange={handleChange}
+                                            type="text" />
+                                    </div>
+                                )}
                             </div>
                         ))}
-                        <div>
-                            <label htmlFor="">ระบุ</label>
-                            <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
-                                name='pcr_other'
-                                value={field.pcr_other}
-                                onChange={handleChange}
-                                type="text" />
-                        </div>
                     </div>
                 </div>
 
@@ -242,19 +268,27 @@ export default function PartTwo() {
                     </div>
                     <div className='pl-[10px] mt-[10px]'>
                         {cordo.map((cordo) => (
-                            <div key={cordo.id}>
-                                <input type="radio" name='cordo' value={cordo.id} onChange={handleChange} />
-                                <label htmlFor="cordo">{cordo.cordo_name}</label>
+                            <div key={cordo.id} className='xl:flex xl:items-center'>
+                                <input
+                                    type="radio"
+                                    name='cordo'
+                                    value={cordo.id}
+                                    onChange={handleChange} 
+                                    checked={field.cordo === String(cordo.id)}/>
+                                <label className='mr-[10px]' htmlFor="cordo">{cordo.cordo_name}</label>
+                                {String(cordo.id) === "2" && field.cordo === "2" && (
+                                    <div>
+                                        <label htmlFor="cordo_tr">ผลตรวจ</label>
+                                        <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
+                                            name='cordo_tr'
+                                            value={field.cordo_tr}
+                                            onChange={handleChange}
+                                            type="text" />
+                                    </div>
+                                )}
                             </div>
                         ))}
-                        <div>
-                            <label htmlFor="cordo_tr">ผลตรวจ</label>
-                            <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
-                                name='cordo_tr'
-                                value={field.cordo_tr}
-                                onChange={handleChange}
-                                type="text" />
-                        </div>
+
                         <div className='mt-[20px]'>
                             <label htmlFor="cordo_other">อื่นๆ</label>
                             <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
@@ -308,25 +342,32 @@ export default function PartTwo() {
                     <div className='pl-[10px] mt-[10px]'>
                         {duringPregnancy.map((duringPregnancy) => (
                             <div key={duringPregnancy.id} className='pt-[5px]'>
-                                <input type="radio" name="during_pregnancy" id={duringPregnancy.id} onChange={handleChange} />
+                                <input 
+                                type="radio"
+                                    name="during_pregnancy" 
+                                    value={duringPregnancy.id} 
+                                    onChange={handleChange} 
+                                    checked={field.during_pregnancy === String(duringPregnancy.id)}
+                                    />
                                 <label className='ml-[5px]' htmlFor="">{duringPregnancy.during_pregnancy_name}</label>
+                                {String(duringPregnancy.id) === "1" && field.during_pregnancy === "1" && (
+                                    <div className=' grid grid-cols-1 gap-[10px] mt-[10px] mb-[10px] xl:ml-[20px] xl:mt-[0px] xl:mb-[0px]'>
+                                        <div>
+                                            <label htmlFor="during_pregnancy_round[]">ครั้งที่1:</label>
+                                            <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round[]' value={field.during_pregnancy_round} onChange={handleChange} type="date" />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="during_pregnancy_round[]">ครั้งที่2:</label>
+                                            <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round[]' value={field.during_pregnancy_round} onChange={handleChange} type="date" />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="during_pregnancy_round[]">ครั้งที่3:</label>
+                                            <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round[]' value={field.during_pregnancy_round} onChange={handleChange} type="date" />
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         ))}
-
-                        <div className=' grid grid-cols-1 gap-[10px] mt-[10px] mb-[10px] xl:mt-[0px] xl:mb-[0px]'>
-                            <div>
-                                <label htmlFor="during_pregnancy_round[]">ครั้งที่1:</label>
-                                <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round[]' value={field.during_pregnancy_round} onChange={handleChange} type="date" />
-                            </div>
-                            <div>
-                                <label htmlFor="during_pregnancy_round[]">ครั้งที่2:</label>
-                                <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round[]' value={field.during_pregnancy_round} onChange={handleChange} type="date" />
-                            </div>
-                            <div>
-                                <label htmlFor="during_pregnancy_round[]">ครั้งที่3:</label>
-                                <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round[]' value={field.during_pregnancy_round} onChange={handleChange} type="date" />
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div className='mt-[30px]'>
@@ -336,14 +377,24 @@ export default function PartTwo() {
                     <div className='pl-[10px] mt-[10px]'>
                         {vip.map((vaccination_in_pregnancy) => (
                             <div key={vaccination_in_pregnancy.id} className='flex items-center'>
-                                <input name='vaccination_in_pregnancy' value={field.vaccination_in_pregnancy} onChange={handleChange} type="radio" />
-                                <label className='ml-[5px]' htmlFor="vaccination_in_pregnancy">{vaccination_in_pregnancy.vip_name}</label>
+                                <input
+                                    name='vaccination_in_pregnancy'
+                                    value={vaccination_in_pregnancy.id}
+                                    onChange={handleChange}
+                                    checked={field.vaccination_in_pregnancy === String(vaccination_in_pregnancy.id)}
+                                    type="radio" />
+                                <label className='ml-[5px] mr-[5px]' htmlFor="vaccination_in_pregnancy">{vaccination_in_pregnancy.vip_name}</label>
+                                {String(vaccination_in_pregnancy.id) === "1" && field.vaccination_in_pregnancy === "1" && (
+                                    <div>
+                                        <label htmlFor="">วันที่:</label>
+                                        <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]'
+                                            type="date" name="vaccination_in_pregnancy_date"
+                                            value={field.vaccination_in_pregnancy_date}
+                                            onChange={handleChange} />
+                                    </div>
+                                )}
                             </div>
                         ))}
-                        <div>
-                            <label htmlFor="">วันที่:</label>
-                            <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' type="date" name="vaccination_in_pregnancy_date" value={field.vaccination_in_pregnancy_date} onChange={handleChange} />
-                        </div>
                         <div className='mt-[10px]'>
                             <div>
                                 <label htmlFor="">Lab 2</label>

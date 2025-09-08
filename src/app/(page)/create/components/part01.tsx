@@ -2,7 +2,7 @@ import React from 'react'
 import useHook from '../useHook';
 
 
-export default function PartOne () {
+export default function PartOne() {
     const { field, handleChange, hnInput, handleSearch, setHnInput, } = useHook();
     return (
         <div>
@@ -19,7 +19,7 @@ export default function PartOne () {
                             <label htmlFor="">HN:</label>
                             <input className='w-full border-gray-400 border p-1 ml-[5px] md:w-[300px] xl:w-[238px] rounded-lg bg-white'
                                 name='hn_wife'
-                                value={field?.hn_wife || ""}
+                                value={field.hn_wife}
                                 onChange={handleChange}
                                 type="text"
                                 placeholder='กรุณากรอกรหัส HN' />
@@ -28,7 +28,7 @@ export default function PartOne () {
                             <label htmlFor="">ชื่อ-นามสกุล:</label>
                             <input className='w-full border-gray-400 border p-1 ml-[5px] rounded-lg md:w-[350px] lg:w-[450px] xl:w-[400px] bg-white'
                                 name='name_wife'
-                                value={field?.name_wife}
+                                value={field.name_wife}
                                 onChange={handleChange}
                                 type="text"
                                 placeholder='กรุณากรอก ชื่อ-นามสกุล' />
@@ -39,7 +39,7 @@ export default function PartOne () {
                             <label htmlFor="">อายุ:</label>
                             <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[100px] bg-white text-center'
                                 name='age_wife'
-                                value={field?.age_wife || ""}
+                                value={field.age_wife}
                                 onChange={handleChange}
                                 type="number"
                                 min="0"
@@ -50,7 +50,7 @@ export default function PartOne () {
                             <label htmlFor="">หมายเลขบัตรประชาชน:</label>
                             <input className='w-full border-gray-400 border p-1 ml-[5px] rounded-lg md:w-[299px] lg:w-[350px] xl:w-[450px] bg-white'
                                 name='id_card_wife'
-                                value={field?.id_card_wife || ""}
+                                value={field.id_card_wife}
                                 onChange={handleChange}
                                 type="text"
                                 placeholder='กรุณากรอกหมายเลขบัตรประชาชน' />
@@ -60,7 +60,7 @@ export default function PartOne () {
                         <label className='w-[40px] mt-[5px]' htmlFor="">ที่อยู่:</label>
                         <textarea className='border-gray-400 border p-1 w-full rounded-lg h-[120px] bg-white'
                             name='address'
-                            value={field?.address || ""}
+                            value={field.address}
                             onChange={handleChange}
                             placeholder='กรุณากรอกที่อยู่'></textarea>
                     </div>
@@ -69,7 +69,7 @@ export default function PartOne () {
                             <label htmlFor="">เบอร์โทรที่ติดต่อได้:</label>
                             <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full md:w-[250px] lg:w-[250px] xl:w-[264px] bg-white'
                                 name='tel_wife'
-                                value={field?.tel_wife || ""}
+                                value={field.tel_wife}
                                 onChange={handleChange}
                                 type="text"
                                 placeholder='กรุณากรอกเบอร์โทรที่ติดต่อได้' />
@@ -78,7 +78,7 @@ export default function PartOne () {
                             <label htmlFor="">อาชีพ:</label>
                             <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full md:w-[350px] xl:w-[314px] bg-white'
                                 name='occupation_wife'
-                                value={field?.occupation_wife || ""}
+                                value={field.occupation_wife}
                                 onChange={handleChange}
                                 type="text"
                                 placeholder='กรุณากรอกอาชีพ' />
@@ -88,7 +88,7 @@ export default function PartOne () {
                         <label className='w-[55px]' htmlFor="">E-mail:</label>
                         <input className='w-full border-gray-400 border p-1 ml-[5px] rounded-lg md:w-[400px] lg:w-[500px] xl:w-full  bg-white'
                             name='email_wife'
-                            value={field?.email_wife || ""}
+                            value={field.email_wife}
                             onChange={handleChange}
                             type="text"
                             placeholder='กรุณากรอกอีเมล' />
@@ -96,9 +96,9 @@ export default function PartOne () {
                     <div className='grid grid-cols-1 mt-[30px] gap-[30px] lg:grid lg:grid-cols-2 xl:flex xl:items-center xl:gap-[37px] '>
                         <div>
                             <label htmlFor="">น้ำหนัก:</label>
-                            <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[50px] bg-white mr-[5px] text-center'
+                            <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[60px] bg-white mr-[5px] text-center'
                                 name='weight_wife'
-                                value={field?.weight_wife || ""}
+                                value={field.weight_wife}
                                 onChange={handleChange}
                                 type="number" placeholder='หนัก' />
                             <span>กก.</span>
@@ -107,7 +107,7 @@ export default function PartOne () {
                             <label htmlFor="">ส่วนสูง:</label>
                             <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[50px] bg-white mr-[5px] text-center'
                                 name='height_wife'
-                                value={field?.height_wife || ""}
+                                value={field.height_wife}
                                 onChange={handleChange}
                                 type="number" placeholder='สูง' />
                             <span>ซม.</span>
@@ -137,22 +137,51 @@ export default function PartOne () {
                             <span>มล./ปรอท</span>
                         </div>
                     </div>
-                    <div className='grid grid-cols-1 mt-[30px] gap-[30px] lg:grid lg:grid-cols-1 xl:flex xl:items-center xl:gap-[37px] '>
+                    <div className='grid grid-cols-2 mt-[30px] gap-[30px] md:grid md:grid-cols-3  lg:grid lg:grid-cols-4 xl:flex xl:items-center xl:gap-[37px] '>
                         <div>
                             <label htmlFor="">PARA:</label>
-                            <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full md:w-[350px] lg:w-[500px] xl:w-[315px] bg-white'
+                            <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[60px] xl:w-[80px] bg-white text-center'
                                 name='para'
                                 value={field.para}
                                 onChange={handleChange}
-                                type="text" />
+                                type="text"
+                                placeholder='' />
+                        </div>
+                        <div>
+                            <label htmlFor="">G:</label>
+                            <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[60px] xl:w-[80px] bg-white text-center'
+                                name='g'
+                                value={field.g}
+                                onChange={handleChange}
+                                type="text"
+                                placeholder='' />
+                        </div>
+                        <div>
+                            <label htmlFor="">P:</label>
+                            <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[60px] xl:w-[80px] bg-white text-center'
+                                name='p'
+                                value={field.p}
+                                onChange={handleChange}
+                                type="text"
+                                placeholder='' />
+                        </div>
+                        <div>
+                            <label htmlFor="">A:</label>
+                            <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[60px] xl:w-[80px] bg-white text-center'
+                                name='a'
+                                value={field.a}
+                                onChange={handleChange}
+                                type="text"
+                                placeholder='' />
                         </div>
                         <div className='lg:flex lg:items-center '>
                             <label htmlFor="">Last:</label>
-                            <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full md:w-[350px] lg:w-[500px] xl:w-[355px] bg-white'
+                            <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[60px] xl:w-[80px] bg-white text-center'
                                 name='last'
                                 value={field.last}
                                 onChange={handleChange}
-                                type="text" />
+                                type="text"
+                                placeholder='' />
                         </div>
                     </div>
                     <div className='grid grid-cols-1 mt-[30px] gap-[30px] lg:grid lg:grid-cols-1 xl:flex xl:items-center xl:gap-[37px] '>
@@ -176,9 +205,9 @@ export default function PartOne () {
                             <label htmlFor="">อายุครรภ์:</label>
                             <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[100px] bg-white mr-[5px] text-center'
                                 name='GA'
-                                value={field.GA}
+                                value={field.GA || ""}
                                 onChange={handleChange}
-                                type="number"
+                                type="text"
                                 placeholder='อายุครรภ์' />
                             <span>สัปดาห์</span>
                         </div>

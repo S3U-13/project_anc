@@ -19,6 +19,9 @@ export default function useHook() {
         bp_systolic: "",
         bp_diastolic: "",
         para: "",
+        g: "",
+        p: "",
+        a: "",
         last: "",
         lmp: "",
         edc: "",
@@ -26,6 +29,7 @@ export default function useHook() {
         HDA: "",//  ประวัติการเเพ้ยา
         DA: "", //  ชื่อยาที่เเพ้
         HR: "", //  HIGH RISK
+        HR_other: "", //  HIGH RISK
         amnio_for_karyotype: "", //  แนะนำการเจาะน้ำคร่ำตรวจโครโมโซม
         gct_1: "",
         gct_2: "",
@@ -52,20 +56,18 @@ export default function useHook() {
         Td_last_date: "",
         during_pregnancy: "", //ในระหว่างตั้งครรภ์:
         during_pregnancy_round: "",
-        vaccination_in_pregnancy: "",
+        vaccination_in_pregnancy: [],
         vaccination_in_pregnancy_date: "",
         lab_2: "",
         hct: "",
         vdrl: "",
         h: "",
-        relationship_group_and_blood_test_results: "",
-        relationship_group_and_blood_test_results_date_1: "",
-        relationship_group_and_blood_test_results_date_2: "",
-        BE: "",
-        BE_not_normal_side: "",
+        relationship_group_and_blood_test_results: [],
+        relationship_group_and_blood_test_results_date: {},
+        BE: [],
+        BE_not_normal_side: [],
         BE_tr: "",
         received_medicine: "",
-        //
         name_husband: "",
         age_husband: "",
         ic_card_husband: "",
@@ -228,6 +230,10 @@ export default function useHook() {
         {
             id: "2",
             BEside_name: "ขวา"
+        },
+        {
+            id: "3",
+            BEside_name: "เป็นทั้ง 2 ข้าง"
         },
     ]);
     const [prenatalCare, setPrenatalCare] = useState([
@@ -469,12 +475,72 @@ export default function useHook() {
         }
     }, [field.weight_wife, field.height_wife]);
 
+    useEffect(() => {
+        if (field.lmp) {
+            const lmp = new Date(field.lmp);
+            const today = new Date();
+
+            // คำนวณ GA
+            const diffTime = today - lmp;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const weeks = Math.floor(diffDays / 7);
+            const days = diffDays % 7;
+
+            // คำนวณ EDC (LMP + 280 วัน)
+            const edcDate = new Date(lmp);
+            edcDate.setDate(edcDate.getDate() + 280);
+
+            setField((prev) => ({
+                ...prev,
+                GA: `${weeks}`,
+                edc: edcDate.toISOString().split("T")[0], // แปลงเป็น yyyy-mm-dd
+            }));
+        }
+    }, [field.lmp]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
+        console.log(name, value); // ดูว่ากดแล้วได้ค่าไหม
         setField((prev) => ({
             ...prev,
-            [name]: value,
+            [name]: e.target.value,
         }));
+    };
+
+    const allowDateIds = ["1", "2"];
+
+    const handleCheckboxChange = (e) => {
+        const { value, checked } = e.target;
+        setField((prev) => {
+            const updated = checked
+                ? [...prev.relationship_group_and_blood_test_results, value]
+                : prev.relationship_group_and_blood_test_results.filter((v) => v !== value);
+
+            return { ...prev, relationship_group_and_blood_test_results: updated };
+        });
+    };
+
+    // handle date
+    const handleDateChange = (e, id) => {
+        const { value } = e.target;
+        setField((prev) => ({
+            ...prev,
+            relationship_group_and_blood_test_results_date: {
+                ...prev.relationship_group_and_blood_test_results_date,
+                [id]: value,
+            },
+        }));
+    };
+
+    const handleCheckboxChange2 = (e) => {
+        const { value, checked } = e.target;
+        setField((prev) => {
+            const updated = checked
+                ? [...prev.BE, value]
+                : prev.BE.filter((v) => v !== value);
+
+            return { ...prev, BE: updated };
+        });
     };
 
     return {
@@ -503,5 +569,9 @@ export default function useHook() {
         hnInput,
         setHnInput,
         handleSearch,
+        handleCheckboxChange,
+        handleCheckboxChange2,
+        handleDateChange,
+        allowDateIds,
     }
 }

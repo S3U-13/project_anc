@@ -99,19 +99,25 @@ export default function PartFour() {
                 </div>
                 <div className='pl-[10px] mt-[10px]'>
                     {pcr.map((pcr) => (
-                        <div key={pcr.id}>
-                            <input type="radio" name='pcr' value={pcr.id} />
-                            <label htmlFor="pcr_husband">{pcr.pcr_name}</label>
+                        <div key={pcr.id} className='xl:flex xl:items-center'>
+                            <input
+                                type="radio"
+                                name='pcr_husband'
+                                value={pcr.id}
+                                onChange={handleChange} />
+                            <label className='ml-[5px] xl:mr-[5px]' htmlFor="pcr_husband">{pcr.pcr_name}</label>
+                            {String(pcr.id) === "2" && field.pcr_husband === "2" && (
+                                <div>
+                                    <label htmlFor="">ระบุ</label>
+                                    <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
+                                        name='pcr_other_husband'
+                                        value={field.pcr_other}
+                                        onChange={handleChange}
+                                        type="text" />
+                                </div>
+                            )}
                         </div>
                     ))}
-                    <div>
-                        <label htmlFor="">ระบุ</label>
-                        <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
-                            name='pcr_other_husband'
-                            value={field.pcr_other}
-                            onChange={handleChange}
-                            type="text" />
-                    </div>
                 </div>
             </div>
         </div>

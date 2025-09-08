@@ -54,7 +54,7 @@ export default function () {
             <div className='flex rounded-xl overflow-hidden shadow-lg border border-gray-200'>
                 <div className='bg-white  w-[600px] h-[700px] p-[10px]'>
                     <div className='w-[195px] h-[55px] overflow-hidden mt-[20px] ml-[20px]'>
-                        <img className='w-full h-full' src="https://ppk2024.semanticplus.co.th/assets/logo/logolong84.png" />
+                        <img className='w-full h-full' src="/images/logo.png" />
                     </div>
                     <div className='w-[370px] mx-auto mt-[80px]'>
                         <h1 className='text-4xl font-bold mb-[20px] text-black'>Login</h1>
@@ -104,17 +104,17 @@ export default function () {
                 </div>
                 <div className="relative w-[600px] h-[700px] overflow-hidden shadow-[#a88cdc] shadow-xl">
                     {/* Background Layer */}
-                    <div
+                    {/* <div
                         className="absolute inset-0 bg-[url('https://scontent.fbkk21-1.fna.fbcdn.net/v/t39.30808-6/306794415_541248258002192_7275606197614530346_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=p97m0tSWTWMQ7kNvwGpc2wL&_nc_oc=AdmtZiCY53PuctvwWlNvBledMmFL5wtzehx6BKeUqf9r2qfXxXEMtXp8FroWtoyh_1A&_nc_zt=23&_nc_ht=scontent.fbkk21-1.fna&_nc_gid=Yp6aJHAUrfMSRw3YoeJZEQ&oh=00_Afap9vmGzRr2mNHseW5oADqtW8wgMGXu5oGysYQgbSjqEg&oe=68BF1237')] 
                bg-cover bg-right filter"
-                    ></div>
+                    ></div> */}
 
                     {/* Optional overlay สีถ้าต้องการ */}
                     {/* <div className="absolute inset-0 bg-[#a88cdc] bg-opacity-30"></div> */}
 
                     {/* Content Layer */}
                     <div className="relative">
-                        {/* <img className="mt-[150px] ml-[30px]" src="พระปกเกล้า-2.png" alt="" /> */}
+                        <img className="w-[600px] h-[700px] bg-cover" src="/images/login_page.jpg" alt="" />
                     </div>
                 </div>
             </div >
