@@ -9,7 +9,6 @@ import useHook from './useHook';
 
 export default function page() {
     const { field,
-
         handleChange,
         handleSubmit,
         BE,
@@ -44,7 +43,6 @@ export default function page() {
                 </div>
                 {/* กล่อง 1 */}
                 <div className='w-[400px] h-full mx-auto pt-[20px] pb-[40px] pr-[40px] pl-[40px] sm:w-[500] md:w-[600px] lg:w-[700px] xl:w-[1000px] xl:pl-[20px] xl:pr-[20px]'>
-
                     <div className='bg-white rounded-lg pr-[20px] pl-[20px] shadow-lg xl:pr-[60px] xl:pl-[60px] pt-[30px] pb-[30px]'>
                         <div className='flex md:flex md:justify-end'>
                             <fieldset>
@@ -144,7 +142,7 @@ export default function page() {
                                 </div>
                                 <div className='flex items-center '>
                                     <label htmlFor="">ส่วนสูง:</label>
-                                    <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[50px] bg-white mr-[5px] text-center'
+                                    <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-[60px] bg-white mr-[5px] text-center'
                                         name='height_wife'
                                         value={field.height_wife}
                                         onChange={handleChange}
@@ -158,7 +156,6 @@ export default function page() {
                                         value={field.bmi_wife}
                                         readOnly
                                         type="number" placeholder='BMI' />
-                                    <span>กก.</span>
                                 </div>
                                 <div className='flex items-center '>
                                     <label htmlFor="">ความดันโลหิต:</label>
@@ -263,12 +260,12 @@ export default function page() {
                                     <div key={hda.id} className='xl:flex xl:items-center'>
                                         <input className='mr-[5px]'
                                             name='HDA'
-                                            value={hda.id}
-                                            checked={field.HDA === String(hda.id)}
+                                            value={hda.hda_name}
+                                            checked={field.HDA === String(hda.hda_name)}
                                             onChange={handleChange}
                                             type="radio" />
                                         <label className='mr-[10px]'>{hda.hda_name}</label>
-                                        {String(hda.id) === "1" && field.HDA === "1" && (
+                                        {String(hda.hda_name) === "เคย" && field.HDA === "เคย" && (
                                             <div>
                                                 <label htmlFor="">ชื่อยาที่เคยเเพ้:</label>
                                                 <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full lg:w-[507px] xl:w-[460px] bg-white mr-[5px]'
@@ -296,12 +293,12 @@ export default function page() {
                                     <div key={hr.id} className='xl:flex xl:items-center'>
                                         <input className='mr-[5px]'
                                             name='HR'
-                                            value={hr.id}
+                                            value={hr.hr_name}
                                             onChange={handleChange}
-                                            checked={field.HR === String(hr.id)}
+                                            checked={field.HR === String(hr.hr_name)}
                                             type="radio" />
                                         <label className='mr-[10px]' htmlFor="HR">{hr.hr_name}</label>
-                                        {String(hr.id) === "2" && field.HR === "2" && (
+                                        {String(hr.hr_name) === "ใช่" && field.HR === "ใช่" && (
                                             <div>
                                                 <label htmlFor="">ระบุ:</label>
                                                 <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full lg:w-[580px] xl:w-[570px] bg-white'
@@ -309,7 +306,7 @@ export default function page() {
                                                     value={field.HR_other}
                                                     onChange={handleChange}
                                                     type="text"
-                                                    placeholder='กรุณาระบุ' />
+                                                    placeholder='กรุณาระบุ'/>
                                             </div>
                                         )}
                                     </div>
@@ -328,7 +325,9 @@ export default function page() {
                                         <div key={amnio.id}>
                                             <input className='mr-[5px]'
                                                 name='amnio_for_karyotype'
-                                                value={amnio.id} onChange={handleChange}
+                                                value={amnio.amnio_name} 
+                                                onChange={handleChange}
+                                                 checked={field.amnio_for_karyotype === String(amnio.amnio_name)}
                                                 type="radio" />
                                             <label className='mr-[10px]' htmlFor="amnio_for_karyotype">{amnio.amnio_name}</label>
                                         </div>
@@ -490,12 +489,12 @@ export default function page() {
                                         <input
                                             type="radio"
                                             name='pcr'
-                                            value={Pcr.id}
+                                            value={Pcr.pcr_name}
                                             onChange={handleChange}
-                                            checked={field.pcr === String(Pcr.id)}
+                                            checked={field.pcr === String(Pcr.pcr_name)}
                                         />
-                                        <label className='mr-[10px]' htmlFor="pcr">{Pcr.pcr_name}</label>
-                                        {String(Pcr.id) === "2" && field.pcr === "2" && (
+                                        <label className='ml-[5px] mr-[5px]' htmlFor="pcr">{Pcr.pcr_name}</label>
+                                        {String(Pcr.pcr_name) === "ใช่" && field.pcr === "ใช่" && (
                                             <div>
                                                 <label htmlFor="">ระบุ</label>
                                                 <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
@@ -520,11 +519,11 @@ export default function page() {
                                         <input
                                             type="radio"
                                             name='cordo'
-                                            value={cordo.id}
+                                            value={cordo.cordo_name}
                                             onChange={handleChange}
-                                            checked={field.cordo === String(cordo.id)} />
-                                        <label className='mr-[10px]' htmlFor="cordo">{cordo.cordo_name}</label>
-                                        {String(cordo.id) === "2" && field.cordo === "2" && (
+                                            checked={field.cordo === String(cordo.cordo_name)} />
+                                        <label className='ml-[5px] mr-[5px]' htmlFor="cordo">{cordo.cordo_name}</label>
+                                        {String(cordo.cordo_name) === "ใช่" && field.cordo === "ใช่" && (
                                             <div>
                                                 <label htmlFor="cordo_tr">ผลตรวจ</label>
                                                 <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
@@ -549,7 +548,12 @@ export default function page() {
                                 <div className='mt-[10px] flex gap-[20px]'>
                                     {PG.map((pg) => (
                                         <div key={pg.id}>
-                                            <input name='PG' value={pg.id} onChange={handleChange} type="radio" />
+                                            <input name='PG' 
+                                            value={pg.PG_name} 
+                                            onChange={handleChange} 
+                                            type="radio" 
+                                            checked={field.PG === String(pg.PG_name)} 
+                                             />
                                             <label className='ml-[5px]' htmlFor="PG">{pg.PG_name}</label>
                                         </div>
                                     ))}
@@ -593,24 +597,24 @@ export default function page() {
                                         <input
                                             type="radio"
                                             name="during_pregnancy"
-                                            value={duringPregnancy.id}
+                                            value={duringPregnancy.during_pregnancy_name}
                                             onChange={handleChange}
-                                            checked={field.during_pregnancy === String(duringPregnancy.id)}
+                                            checked={field.during_pregnancy === String(duringPregnancy.during_pregnancy_name)}
                                         />
                                         <label className='ml-[5px]' htmlFor="">{duringPregnancy.during_pregnancy_name}</label>
-                                        {String(duringPregnancy.id) === "1" && field.during_pregnancy === "1" && (
+                                        {String(duringPregnancy.during_pregnancy_name) === "ฉีดวัคซีน" && field.during_pregnancy === "ฉีดวัคซีน" && (
                                             <div className=' grid grid-cols-1 gap-[10px] mt-[10px] mb-[10px] xl:ml-[20px] xl:mt-[0px] xl:mb-[0px]'>
                                                 <div>
                                                     <label htmlFor="during_pregnancy_round[]">ครั้งที่1:</label>
-                                                    <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round[]' value={field.during_pregnancy_round} onChange={handleChange} type="date" />
+                                                    <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round_1' value={field.during_pregnancy_round_1} onChange={handleChange} type="date" />
                                                 </div>
                                                 <div>
                                                     <label htmlFor="during_pregnancy_round[]">ครั้งที่2:</label>
-                                                    <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round[]' value={field.during_pregnancy_round} onChange={handleChange} type="date" />
+                                                    <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round_2' value={field.during_pregnancy_round_2} onChange={handleChange} type="date" />
                                                 </div>
                                                 <div>
                                                     <label htmlFor="during_pregnancy_round[]">ครั้งที่3:</label>
-                                                    <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round[]' value={field.during_pregnancy_round} onChange={handleChange} type="date" />
+                                                    <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='during_pregnancy_round_3' value={field.during_pregnancy_round_3} onChange={handleChange} type="date" />
                                                 </div>
                                             </div>
                                         )}
@@ -627,12 +631,12 @@ export default function page() {
                                     <div key={vaccination_in_pregnancy.id} className='flex items-center'>
                                         <input
                                             name='vaccination_in_pregnancy'
-                                            value={vaccination_in_pregnancy.id}
+                                            value={vaccination_in_pregnancy.vip_name}
                                             onChange={handleChange}
-                                            checked={field.vaccination_in_pregnancy === String(vaccination_in_pregnancy.id)}
+                                            checked={field.vaccination_in_pregnancy === String(vaccination_in_pregnancy.vip_name)}
                                             type="radio" />
                                         <label className='ml-[5px] mr-[5px]' htmlFor="vaccination_in_pregnancy">{vaccination_in_pregnancy.vip_name}</label>
-                                        {String(vaccination_in_pregnancy.id) === "1" && field.vaccination_in_pregnancy === "1" && (
+                                        {String(vaccination_in_pregnancy.vip_name) === "กระตุ้นครรภ์นี้" && field.vaccination_in_pregnancy === "กระตุ้นครรภ์นี้" && (
                                             <div>
                                                 <label htmlFor="">วันที่:</label>
                                                 <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]'
@@ -671,7 +675,7 @@ export default function page() {
                             <div className='bg-gray-100 border-b-2 border-gray-300 w-full p-[10px] pl-[20px] pt-[15px]'>
                                 <label className='text-xl' htmlFor="">กลุ่มสัมพันธ์ เเละ ฟังผลเลือด:</label>
                             </div>
-                            <div className='mt-[20px] pl-[10px]'>
+                            <div className=' pl-[10px]'>
                                 {RgAbTr.map((item) => {
                                     // แสดงเฉพาะ id ที่อยากให้มีช่องวันที่
                                     return (
@@ -679,8 +683,8 @@ export default function page() {
                                             <input
                                                 className='xl:mt-[10px]'
                                                 type="checkbox"
-                                                value={item.id}
-                                                checked={field.relationship_group_and_blood_test_results.includes(String(item.id))}
+                                                value={item.RgAbTr_name}
+                                                checked={field.relationship_group_and_blood_test_results.includes(String(item.RgAbTr_name))}
                                                 onChange={handleCheckboxChange}
                                             />
                                             <label className="ml-[5px] xl:mt-[10px]">{item.RgAbTr_name}</label>
@@ -709,29 +713,29 @@ export default function page() {
                                 <div className='bg-gray-100 border-b-2 border-gray-300 w-full p-[10px] pl-[20px] pt-[15px]'>
                                     <label className='text-xl' htmlFor="">ตรวจเต้านม,หัวนม:</label>
                                 </div>
-                                <div className='mt-[20px] pl-[10px]'>
+                                <div className=' pl-[10px]'>
                                     {BE.map((be) => (
                                         <div key={be.id}>
                                             <input
                                                 className='mt-[10px]'
                                                 type="checkbox"
-                                                value={be.id}
+                                                value={be.BE_name}
                                                 name="BE"
-                                                checked={field.BE.includes(String(be.id))}
+                                                checked={field.BE.includes(String(be.BE_name))}
                                                 onChange={handleCheckboxChange2} // ใช้ฟังก์ชันนี้สำหรับ checkbox
                                             />
                                             <label className="pl-[5px] xl:mt-[10px]">{be.BE_name}</label>
 
                                             {/* แสดง radio เฉพาะ id=2 */}
-                                            {String(be.id) === "2" && field.BE.includes("2") &&
+                                            {String(be.BE_name) === "ไม่ปกติ" && field.BE.includes("ไม่ปกติ") &&
                                                 BEside.map((beSide) => (
                                                     <div key={beSide.id} className='ml-[20px]'>
                                                         <input
                                                             className=''
                                                             type="radio"
-                                                            value={beSide.id}
+                                                            value={beSide.BEside_name}
                                                             name="BE_not_normal_side"
-                                                            checked={field.BE_not_normal_side === String(beSide.id)}
+                                                            checked={field.BE_not_normal_side === String(beSide.BEside_name)}
                                                             onChange={handleChange}
                                                         />
                                                         <label className="pl-[5px]">{beSide.BEside_name}</label>
@@ -740,7 +744,7 @@ export default function page() {
                                             }
 
                                             {/* แสดง input ผลตรวจเฉพาะ id=4 */}
-                                            {String(be.id) === "4" && field.BE.includes("4") && (
+                                            {String(be.BE_name) === "ANC Pap smear" && field.BE.includes("ANC Pap smear") && (
                                                 <div className="pl-[20px] xl:pl-[10px] xl:ml-[10px]">
                                                     <label htmlFor="BE_tr">ผลตรวจ</label>
                                                     <input
@@ -766,7 +770,10 @@ export default function page() {
                             <div className='pl-[10px]'>
                                 {receivedMedicine.map((receivedMedicine) => (
                                     <div key={receivedMedicine.id} className='mt-[5px]'>
-                                        <input type="radio" name='received_medicine' value={receivedMedicine.id} onChange={handleChange} />
+                                        <input type="radio" 
+                                        name='received_medicine' 
+                                        value={receivedMedicine.received_medicine_name} 
+                                        onChange={handleChange} />
                                         <label htmlFor="">{receivedMedicine.received_medicine_name}</label>
                                     </div>
                                 ))}
@@ -789,7 +796,7 @@ export default function page() {
                             </div>
                             <div className='mt-[10px] xl:mt-[20px] xl:flex xl:items-center xl:gap-[37px]'>
                                 <div>
-                                    <label htmlFor="">บัตรประชาชน:</label>
+                                    <label htmlFor="id_card_husband">บัตรประชาชน:</label>
                                     <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px] w-full xl:w-[360px]' name='id_card_husband' value={field.ic_card_husband} onChange={handleChange} type="text" placeholder='บัตรประชาชน' />
                                 </div>
                                 <div className='mt-[10px] xl:mt-0'>
@@ -860,7 +867,7 @@ export default function page() {
                             </div>
                             <div className='mt-[20px] bg-white xl:bg-white/0 p-[20px] xl:p-[0] rounded-lg'>
                                 <label htmlFor="">Hb Typing</label>
-                                <input className='border border-gray-400 p-1 rounded-lg ml-[5px] bg-white' name='HB_typing_husband' value={field.Hb_typing_husband} onChange={handleChange} type="text" />
+                                <input className='border border-gray-400 p-1 rounded-lg ml-[5px] bg-white' name='Hb_typing_husband' value={field.Hb_typing_husband} onChange={handleChange} type="text" />
                             </div>
                         </div>
                         <div className='mt-[40px]'>
@@ -868,20 +875,20 @@ export default function page() {
                                 <label className='text-xl' htmlFor="">PCR</label>
                             </div>
                             <div className='pl-[10px] mt-[10px]'>
-                                {pcr.map((pcr) => (
-                                    <div key={pcr.id} className='xl:flex xl:items-center'>
+                                {pcr.map((pcr_husband) => (
+                                    <div key={pcr_husband.id} className='xl:flex xl:items-center'>
                                         <input
                                             type="radio"
                                             name='pcr_husband'
-                                            value={pcr.id}
+                                            value={pcr_husband.pcr_name}
                                             onChange={handleChange} />
-                                        <label className='ml-[5px] xl:mr-[5px]' htmlFor="pcr_husband">{pcr.pcr_name}</label>
-                                        {String(pcr.id) === "2" && field.pcr_husband === "2" && (
+                                        <label className='ml-[5px] xl:mr-[5px]' htmlFor="pcr_husband">{pcr_husband.pcr_name}</label>
+                                        {String(pcr_husband.pcr_name) === "ใช่" && field.pcr_husband === "ใช่" && (
                                             <div>
                                                 <label htmlFor="">ระบุ</label>
                                                 <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
                                                     name='pcr_other_husband'
-                                                    value={field.pcr_other}
+                                                    value={field.pcr_other_husband}
                                                     onChange={handleChange}
                                                     type="text" />
                                             </div>
@@ -930,20 +937,20 @@ export default function page() {
                             </div>
                             <div className='pl-[5px]'>
                                 <div className='mt-[10px]'>
-                                    <input type="checkbox" />
+                                    <input type="checkbox" name='Rcvd_ref' value="รับRefer"/>
                                     <label className='ml-[5px]' htmlFor="">รับRefer</label>
                                 </div>
                                 <div className='pl-[15px] xl:pl-[20px]'>
                                     {refChoice.map((refChoice) => (
                                         <div key={refChoice.id} className='xl:flex xl:items-center'>
-                                            <input type="checkbox"
+                                            <input type="radio"
                                                 name='Rcvd_ref_choice'
-                                                value={refChoice.id}
+                                                value={refChoice.ref_choice_name}
                                                 onChange={handleChange}
                                             // checked={field.Rcvd_ref_choice === String(refChoice.id)}
                                             />
                                             <label className='ml-[5px]' htmlFor="">{refChoice.ref_choice_name}</label>
-                                            {String(refChoice.id) === "2" && field.Rcvd_ref_choice === "2" && (
+                                            {String(refChoice.ref_choice_name) === "ต่างจังหวัด" && field.Rcvd_ref_choice === "ต่างจังหวัด" && (
                                                 <div className='pl-[20px] xl:pl-[10px]'>
                                                     <label htmlFor="">รพช/รพสต</label>
                                                     <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='Rcvd_ref_in_province' value={field.Rcvd_ref_in_province} onChange={handleChange} type="text" />
@@ -962,20 +969,20 @@ export default function page() {
                             </div>
                             <div className='pl-[5px]'>
                                 <div className='mt-[10px]'>
-                                    <input type="checkbox" />
+                                    <input type="checkbox" value="ส่งต่อ" name='Fwd_ref' onChange={handleChange}/>
                                     <label className='ml-[5px]' htmlFor="">ส่งต่อ</label>
                                 </div>
                                 <div className='pl-[15px] xl:pl-[20px]'>
                                     {refChoice.map((FwdRefChoice) => (
                                         <div key={FwdRefChoice.id} className='xl:flex xl:items-center'>
-                                            <input type="checkbox"
+                                            <input type="radio"
                                                 name='Fwd_ref_choice'
-                                                value={FwdRefChoice.id}
+                                                value={FwdRefChoice.ref_choice_name}
                                                 onChange={handleChange}
                                             // checked={field.Fwd_ref_choice === String(FwdRefChoice.id)}
                                             />
                                             <label className='ml-[5px]' htmlFor="">{FwdRefChoice.ref_choice_name}</label>
-                                            {String(FwdRefChoice.id) === "2" && field.Fwd_ref_choice === "2" && (
+                                            {String(FwdRefChoice.ref_choice_name) === "ต่างจังหวัด" && field.Fwd_ref_choice === "ต่างจังหวัด" && (
                                                 <div className='pl-[20px] xl:pl-[10px]'>
                                                     <label htmlFor="">รพช/รพสต</label>
                                                     <input name='Fwd_ref_in_province' value={field.Fwd_ref_in_province} onChange={handleChange} className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' type="text" />

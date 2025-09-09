@@ -1,5 +1,4 @@
-
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 
@@ -118,6 +117,7 @@ export default function useHook() {
             hr_name: "ใช่"
         },
     ]);
+
     const [amnio, setAmnio] = useState([
         {
             id: "1",
@@ -132,6 +132,7 @@ export default function useHook() {
             amnio_name: "รอ"
         },
     ]);
+
     const [pcr, setPcr] = useState([
         {
             id: "1",
@@ -142,6 +143,7 @@ export default function useHook() {
             pcr_name: "ใช่"
         },
     ]);
+
     const [cordo, setCordo] = useState([
         {
             id: "1",
@@ -152,6 +154,7 @@ export default function useHook() {
             cordo_name: "ใช่"
         },
     ]);
+
     const [PG, setPG] = useState([
         {
             id: "1",
@@ -162,6 +165,7 @@ export default function useHook() {
             PG_name: "ตั้งครรภ์ต่อ"
         },
     ]);
+
     const [duringPregnancy, setDuringPregnancy] = useState([
         {
             id: "1",
@@ -172,6 +176,7 @@ export default function useHook() {
             during_pregnancy_name: "ไม่ฉีดวัคซีน"
         },
     ]);
+
     const [vip, setVip] = useState([
         {
             id: "1",
@@ -182,6 +187,7 @@ export default function useHook() {
             vip_name: "ไม่ได้ฉีดในครรภ์นี้"
         },
     ]);
+
     const [relationship, setRelationship] = useState([
         {
             id: "1",
@@ -204,6 +210,7 @@ export default function useHook() {
             relationship_name: "ส่งพบนักจิตวิทยา"
         },
     ]);
+
     const [BE, setBE] = useState([
         {
             id: "1",
@@ -222,6 +229,7 @@ export default function useHook() {
             BE_name: "ANC Pap smear"
         },
     ]);
+
     const [BEside, setBEside] = useState([
         {
             id: "1",
@@ -236,6 +244,7 @@ export default function useHook() {
             BEside_name: "เป็นทั้ง 2 ข้าง"
         },
     ]);
+
     const [prenatalCare, setPrenatalCare] = useState([
         {
             id: "1",
@@ -246,6 +255,7 @@ export default function useHook() {
             prenatal_care_name: "ไม่ครบ"
         },
     ]);
+
     const [receivedMedicine, setReceivedMedicine] = useState([
         {
             id: "1",
@@ -260,6 +270,7 @@ export default function useHook() {
             received_medicine_name: "Folic"
         },
     ]);
+
     const [refChoice, setRefChoice] = useState([
         {
             id: "1",
@@ -270,6 +281,7 @@ export default function useHook() {
             ref_choice_name: "ต่างจังหวัด"
         },
     ]);
+
     const [FwdRefChoice, setFwdRefChoice] = useState([
         {
             id: "1",
@@ -280,6 +292,7 @@ export default function useHook() {
             Fwd_ref_choice_name: "ต่างจังหวัด"
         },
     ]);
+
     const [ga, setGa] = useState([
         {
             id: "1",
@@ -302,6 +315,7 @@ export default function useHook() {
             ga_name: "32 สับดาห์ ไปจนถึง 40 สัปดาห์"
         },
     ]);
+
     const [RgAbTr, setRgAbTr] = useState([
         {
             id: "1",
@@ -329,39 +343,33 @@ export default function useHook() {
 
 
 
-    const handleSubmit = (e) => {
+    const handleEdit = (e) => {
         e.preventDefault();
 
-        let existing = JSON.parse(localStorage.getItem("mockData")) || [];
-
-        // ✅ สร้าง anc_no 6 หลักอัตโนมัติ
-        let nextNo = "000001";
-        if (existing.length > 0) {
-            const lastNo = existing[existing.length - 1].anc_no;
-            const newNo = (parseInt(lastNo, 10) + 1).toString().padStart(6, "0");
-            nextNo = newNo;
-        }
-
-        const newData = {
-            ...field,      // ฟิลด์ที่กรอกจากฟอร์ม
-            anc_no: nextNo // หมายเลข anc_no
-        };
-
         try {
-            if (newData) {
-                const updatedData = [...existing, newData];
-                localStorage.setItem("mockData", JSON.stringify(updatedData));
+            // ดึงข้อมูลเก่ามาทั้งหมด
+            let existing = JSON.parse(localStorage.getItem("mockData")) || [];
+
+            // หา index ของ record ที่จะอัพเดท
+            const index = existing.findIndex((item) => item.anc_no === field.anc_no);
+
+            if (index !== -1) {
+                // อัพเดทข้อมูล record นั้น
+                existing[index] = { ...existing[index], ...field };
+
+                // เซฟกลับ localStorage
+                localStorage.setItem("mockData", JSON.stringify(existing));
 
                 Swal.fire({
                     icon: "success",
-                    text: "เพิ่มข้อมูลสำเร็จ",
+                    text: "แก้ไขข้อมูลสำเร็จ",
                 });
 
                 router.push("/");
             } else {
                 Swal.fire({
                     icon: "warning",
-                    text: "เพิ่มข้อมูลไม่สำเร็จ",
+                    text: "ไม่พบข้อมูลที่จะอัพเดท",
                 });
             }
         } catch (error) {
@@ -498,13 +506,25 @@ export default function useHook() {
         }
     }, [field.lmp]);
 
+    const params = useParams();
+    const anc_no = params?.id?.toString(); // ✅ ใช้ id เพราะโฟลเดอร์คือ [id]
+    // const [field, setField] = useState(null);
+
+    useEffect(() => {
+        if (!anc_no) return;
+
+        const stored = JSON.parse(localStorage.getItem("mockData")) || [];
+        const found = stored.find((item) => String(item.anc_no) === anc_no);
+        setField(found);
+    }, [anc_no]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         console.log(name, value); // ดูว่ากดแล้วได้ค่าไหม
-        setField((prev) => ({
-            ...prev,
+        setField({
+            ...field,
             [name]: e.target.value,
-        }));
+        });
     };
 
     const allowDateIds = ["1", "2"];
@@ -548,7 +568,7 @@ export default function useHook() {
         setField,
         router,
         handleChange,
-        handleSubmit,
+        handleEdit,
         BE,
         BEside,
         FwdRefChoice,
@@ -566,9 +586,6 @@ export default function useHook() {
         vip,
         ga,
         RgAbTr,
-        hnInput,
-        setHnInput,
-        handleSearch,
         handleCheckboxChange,
         handleCheckboxChange2,
         handleDateChange,
