@@ -36,7 +36,7 @@ export default function Navbar() {
                             <h1 className='text-sm'><span className='font-bold'>ชื่อ: </span>user_01</h1>
                             <h1 className='text-[10px] text-right'><span className='font-bold'>ตำเเหน่ง: </span>-</h1>
                         </div>
-                        <div className='w-[50px] h-[50px] rounded-full bg-[#c4a6f7] overflow-hidden border-2 border-green-500' ref={dropdownRef}>
+                        <div className='w-[50px] h-[50px] rounded-full bg-[#c4a6f7] overflow-hidden border-2 border-[#9873d9]' ref={dropdownRef}>
                             <button
                                 type="button"
                                 onClick={toggleDropdown}>
@@ -64,8 +64,8 @@ export default function Navbar() {
             </div>
             <div className='border-gray-50 border rounded-xl bg-white shadow-lg h-[40px] mt-[10px] pl-[40px] pr-[40px] w-[800px] mx-auto'>
                 <ul className='flex justify-center items-center gap-[20px]'>
-                    <Link href="/"><li className='text-md text-black text-center hover:underline hover:text-blue-500 p-2 hover:duration-300'>Dashboard</li></Link>
-                    <Link href="/anc"><li className='text-md text-black text-center hover:underline hover:text-blue-500 p-2 hover:duration-300'>ประวัติผู้ฝากครรภ์</li></Link>
+                    <Link href="/"><li className='text-md text-black text-center hover:underline hover:text-[#683cb4] p-2 hover:duration-300'>Dashboard</li></Link>
+                    <Link href="/anc"><li className='text-md text-black text-center hover:underline hover:text-[#683cb4] p-2 hover:duration-300'>ประวัติผู้ฝากครรภ์</li></Link>
                 </ul>
             </div>
         </div>

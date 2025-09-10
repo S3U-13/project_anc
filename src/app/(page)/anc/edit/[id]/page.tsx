@@ -765,7 +765,9 @@ export default function Page() {
                                         <input type="radio"
                                             name='received_medicine'
                                             value={receivedMedicine.received_medicine_name}
-                                            onChange={handleChange} />
+                                            onChange={handleChange}
+                                            checked={field.received_medicine.includes(String(receivedMedicine.received_medicine_name))}
+                                        />
                                         <label htmlFor="">{receivedMedicine.received_medicine_name}</label>
                                     </div>
                                 ))}
@@ -789,7 +791,7 @@ export default function Page() {
                             <div className='mt-[10px] xl:mt-[20px] xl:flex xl:items-center xl:gap-[37px]'>
                                 <div>
                                     <label htmlFor="id_card_husband">บัตรประชาชน:</label>
-                                    <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px] w-full xl:w-[360px]' name='id_card_husband' value={field.ic_card_husband} onChange={handleChange} type="text" placeholder='บัตรประชาชน' />
+                                    <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px] w-full xl:w-[360px]' name='id_card_husband' value={field.id_card_husband} onChange={handleChange} type="text" placeholder='บัตรประชาชน' />
                                 </div>
                                 <div className='mt-[10px] xl:mt-0'>
                                     <label htmlFor="">HN:</label>
@@ -873,7 +875,8 @@ export default function Page() {
                                             type="radio"
                                             name='pcr_husband'
                                             value={pcr_husband.pcr_name}
-                                            onChange={handleChange} />
+                                            onChange={handleChange}
+                                            checked={field.pcr_husband.includes(String(pcr_husband.pcr_name))} />
                                         <label className='ml-[5px] xl:mr-[5px]' htmlFor="pcr_husband">{pcr_husband.pcr_name}</label>
                                         {String(pcr_husband.pcr_name) === "ใช่" && field.pcr_husband === "ใช่" && (
                                             <div>
@@ -898,7 +901,11 @@ export default function Page() {
                             <div className='pl-[10px] xl:pl-[5px] mt-[10px]'>
                                 {prenatalCare.map((prenatalCare) => (
                                     <div key={prenatalCare.id}>
-                                        <input type="radio" name='prenatal_care_according_to_criteria' value={prenatalCare.id} onChange={handleChange} />
+                                        <input type="radio" name='prenatal_care_according_to_criteria'
+                                            value={prenatalCare.prenatal_care_name}
+                                            onChange={handleChange}
+                                            checked={field.prenatal_care_according_to_criteria.includes(String(prenatalCare.prenatal_care_name))}
+                                        />
                                         <label className='ml-[5px]' htmlFor="">{prenatalCare.prenatal_care_name}</label>
                                     </div>
                                 ))}
@@ -913,7 +920,12 @@ export default function Page() {
                             <div className='pl-[10px] mt-[10px]'>
                                 {ga.map((ga) => (
                                     <div key={ga.id}>
-                                        <input type="radio" name="ga" value={ga.id} onChange={handleChange} />
+                                        <input type="radio"
+                                            name="ga"
+                                            value={ga.ga_name}
+                                            onChange={handleChange}
+                                            checked={field.ga.includes(String(ga.ga_name))}
+                                        />
                                         <label className='ml-[5px]' htmlFor="">{ga.ga_name}</label>
                                     </div>
                                 ))}
@@ -929,7 +941,12 @@ export default function Page() {
                             </div>
                             <div className='pl-[5px]'>
                                 <div className='mt-[10px]'>
-                                    <input type="checkbox" name='Rcvd_ref' value="รับRefer" />
+                                    <input type="checkbox"
+                                        name='Rcvd_ref'
+                                        value="รับRefer"
+                                        onChange={handleChange}
+                                        checked={field.Rcvd_ref.includes(String('รับRefer'))}
+                                    />
                                     <label className='ml-[5px]' htmlFor="">รับRefer</label>
                                 </div>
                                 <div className='pl-[15px] xl:pl-[20px]'>
@@ -939,7 +956,7 @@ export default function Page() {
                                                 name='Rcvd_ref_choice'
                                                 value={refChoice.ref_choice_name}
                                                 onChange={handleChange}
-                                            // checked={field.Rcvd_ref_choice === String(refChoice.id)}
+                                                checked={field.Rcvd_ref_choice === String(refChoice.ref_choice_name)}
                                             />
                                             <label className='ml-[5px]' htmlFor="">{refChoice.ref_choice_name}</label>
                                             {String(refChoice.ref_choice_name) === "ต่างจังหวัด" && field.Rcvd_ref_choice === "ต่างจังหวัด" && (
@@ -961,7 +978,12 @@ export default function Page() {
                             </div>
                             <div className='pl-[5px]'>
                                 <div className='mt-[10px]'>
-                                    <input type="checkbox" value="ส่งต่อ" name='Fwd_ref' onChange={handleChange} />
+                                    <input type="checkbox"
+                                        value="ส่งต่อ"
+                                        name='Fwd_ref'
+                                        onChange={handleChange}
+                                        checked={field.Fwd_ref.includes(String('ส่งต่อ'))}
+                                    />
                                     <label className='ml-[5px]' htmlFor="">ส่งต่อ</label>
                                 </div>
                                 <div className='pl-[15px] xl:pl-[20px]'>
@@ -971,7 +993,7 @@ export default function Page() {
                                                 name='Fwd_ref_choice'
                                                 value={FwdRefChoice.ref_choice_name}
                                                 onChange={handleChange}
-                                            // checked={field.Fwd_ref_choice === String(FwdRefChoice.id)}
+                                            checked={field.Fwd_ref_choice === String(FwdRefChoice.ref_choice_name)}
                                             />
                                             <label className='ml-[5px]' htmlFor="">{FwdRefChoice.ref_choice_name}</label>
                                             {String(FwdRefChoice.ref_choice_name) === "ต่างจังหวัด" && field.Fwd_ref_choice === "ต่างจังหวัด" && (

@@ -12,22 +12,16 @@ export default function BarChart() {
                     },
                 ],
                 chart: {
-                    height: 550,
+                    height: 510,
                     type: "bar",
                 },
                 colors: [
-                    "#008FFB", // ฟ้า
-                    "#00E396", // เขียวมิ้น
-                    "#FEB019", // ส้ม
-                    "#FF4560", // แดง
-                    "#775DD0", // ม่วง
-                    "#546E7A", // เทา
-                    "#26a69a", // เขียวเข้ม
-                    "#d10ce8", // ชมพูม่วง
-                    "#F86624", // ส้มเข้ม
-                    "#2E294E", // น้ำเงินเข้ม
-                    "#9C27B0", // ม่วงสด
-                    "#03A9F4", // ฟ้าอ่อน
+                    "#9873d9",
+                    "#9e7bdb",
+                    "#9f7ed9",
+                    "#a183d6",
+                    "#a285d4",
+                    "#a48ad1",
                 ],
                 plotOptions: {
                     bar: {
@@ -64,7 +58,7 @@ export default function BarChart() {
                 },
             };
 
-            const chart = new ApexCharts(document.querySelector("#chart"), options);
+            const chart = new ApexCharts(document.querySelector("#chart-01"), options);
             chart.render();
 
             // ✅ cleanup ป้องกัน chart ซ้ำเวลา re-render
@@ -75,7 +69,7 @@ export default function BarChart() {
     }, []);
     return (
         <div>
-            <div id="chart"></div>
+            <div id="chart-01"></div>
         </div>
     )
 }

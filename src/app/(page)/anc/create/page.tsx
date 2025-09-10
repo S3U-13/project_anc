@@ -797,7 +797,7 @@ export default function page() {
                             <div className='mt-[10px] xl:mt-[20px] xl:flex xl:items-center xl:gap-[37px]'>
                                 <div>
                                     <label htmlFor="id_card_husband">บัตรประชาชน:</label>
-                                    <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px] w-full xl:w-[360px]' name='id_card_husband' value={field.ic_card_husband} onChange={handleChange} type="text" placeholder='บัตรประชาชน' />
+                                    <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px] w-full xl:w-[360px]' name='id_card_husband' value={field.id_card_husband} onChange={handleChange} type="text" placeholder='บัตรประชาชน' />
                                 </div>
                                 <div className='mt-[10px] xl:mt-0'>
                                     <label htmlFor="">HN:</label>
@@ -906,7 +906,11 @@ export default function page() {
                             <div className='pl-[10px] xl:pl-[5px] mt-[10px]'>
                                 {prenatalCare.map((prenatalCare) => (
                                     <div key={prenatalCare.id}>
-                                        <input type="radio" name='prenatal_care_according_to_criteria' value={prenatalCare.id} onChange={handleChange} />
+                                        <input 
+                                        type="radio" 
+                                        name='prenatal_care_according_to_criteria' 
+                                        value={prenatalCare.prenatal_care_name} 
+                                        onChange={handleChange} />
                                         <label className='ml-[5px]' htmlFor="">{prenatalCare.prenatal_care_name}</label>
                                     </div>
                                 ))}
@@ -921,7 +925,11 @@ export default function page() {
                             <div className='pl-[10px] mt-[10px]'>
                                 {ga.map((ga) => (
                                     <div key={ga.id}>
-                                        <input type="radio" name="ga" value={ga.id} onChange={handleChange} />
+                                        <input 
+                                        type="radio" 
+                                        name="ga" 
+                                        value={ga.ga_name} 
+                                        onChange={handleChange} />
                                         <label className='ml-[5px]' htmlFor="">{ga.ga_name}</label>
                                     </div>
                                 ))}
@@ -937,7 +945,11 @@ export default function page() {
                             </div>
                             <div className='pl-[5px]'>
                                 <div className='mt-[10px]'>
-                                    <input type="checkbox" name='Rcvd_ref' value="รับRefer"/>
+                                    <input 
+                                    type="checkbox" 
+                                    name='Rcvd_ref' 
+                                    value="รับRefer"
+                                    onChange={handleChange}/>
                                     <label className='ml-[5px]' htmlFor="">รับRefer</label>
                                 </div>
                                 <div className='pl-[15px] xl:pl-[20px]'>
@@ -969,7 +981,10 @@ export default function page() {
                             </div>
                             <div className='pl-[5px]'>
                                 <div className='mt-[10px]'>
-                                    <input type="checkbox" value="ส่งต่อ" name='Fwd_ref' onChange={handleChange}/>
+                                    <input type="checkbox" 
+                                    value="ส่งต่อ" 
+                                    name='Fwd_ref' 
+                                    onChange={handleChange}/>
                                     <label className='ml-[5px]' htmlFor="">ส่งต่อ</label>
                                 </div>
                                 <div className='pl-[15px] xl:pl-[20px]'>

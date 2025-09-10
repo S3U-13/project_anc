@@ -132,7 +132,7 @@ export default function useHook() {
         },
         {
             id: "3",
-            amnio_name: "รอ"
+            amnio_name: "รอปรึกษา"
         },
     ]);
 
@@ -374,7 +374,7 @@ export default function useHook() {
                     text: "เพิ่มข้อมูลสำเร็จ",
                 });
 
-                router.push("/");
+                router.push("/anc");
             } else {
                 Swal.fire({
                     icon: "warning",

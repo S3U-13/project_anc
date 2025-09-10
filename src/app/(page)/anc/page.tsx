@@ -73,7 +73,7 @@ export default function Home() {
             ) : (
               <tbody>
                 {field.map((field, index) => (
-                  <tr key={index} className="odd:bg-gray-50 even:bg-gray-100">
+                  <tr key={index} className="odd:bg-white even:bg-gray-50">
                     <td className="p-6 rounded-l-xl">{field.anc_no}</td>
                     <td className="p-2">{field.hn_wife}</td>
                     <td className="p-2">{field.name_wife}</td>

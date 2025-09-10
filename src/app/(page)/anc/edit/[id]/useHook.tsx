@@ -54,7 +54,9 @@ export default function useHook() {
         Td_num: "", //  วัคซีนบาดทะยัก ก่อนตั้งครรภ์
         Td_last_date: "",
         during_pregnancy: "", //ในระหว่างตั้งครรภ์:
-        during_pregnancy_round: "",
+        during_pregnancy_round_1: "",
+        during_pregnancy_round_2: "",
+        during_pregnancy_round_3: "",
         vaccination_in_pregnancy: [],
         vaccination_in_pregnancy_date: "",
         lab_2: "",
@@ -69,7 +71,7 @@ export default function useHook() {
         received_medicine: "",
         name_husband: "",
         age_husband: "",
-        ic_card_husband: "",
+        id_card_husband: "",
         hn_husband: "",
         tel_husband: "",
         occupation_husband: "",
@@ -129,7 +131,7 @@ export default function useHook() {
         },
         {
             id: "3",
-            amnio_name: "รอ"
+            amnio_name: "รอปรึกษา"
         },
     ]);
 
@@ -365,7 +367,7 @@ export default function useHook() {
                     text: "แก้ไขข้อมูลสำเร็จ",
                 });
 
-                router.push("/");
+                router.push("/anc");
             } else {
                 Swal.fire({
                     icon: "warning",
@@ -519,12 +521,12 @@ export default function useHook() {
     }, [anc_no]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        console.log(name, value); // ดูว่ากดแล้วได้ค่าไหม
-        setField({
-            ...field,
-            [name]: e.target.value,
-        });
+        const { name, value, type, checked } = e.target;
+
+        setField(prev => ({
+            ...prev,
+            [name]: type === "checkbox" ? (checked ? value : "") : value,
+        }));
     };
 
     const allowDateIds = ["1", "2"];
