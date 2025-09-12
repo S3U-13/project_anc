@@ -66,7 +66,7 @@ export default function useHook() {
         relationship_group_and_blood_test_results: [],
         relationship_group_and_blood_test_results_date: {},
         BE: [],
-        BE_not_normal_side: [],
+        BE_not_normal_side: "",
         BE_tr: "",
         received_medicine: "",
         name_husband: "",
