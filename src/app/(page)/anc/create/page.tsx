@@ -1,38 +1,20 @@
 'use client';
 import React, { useState } from 'react';
-import PartOne from './components/part01';
-import PartTwo from './components/part02';
-import PartThree from './components/part03';
-import PartFour from './components/part04';
-import PartFive from './components/part05';
 import useHook from './useHook';
 
 export default function page() {
     const { field,
         handleChange,
         handleSubmit,
-        BE,
-        BEside,
-        HDA,
-        HR,
-        PG,
-        amnio,
-        cordo,
-        pcr,
-        duringPregnancy,
-        prenatalCare,
-        receivedMedicine,
-        refChoice,
-        vip,
-        ga,
-        RgAbTr,
         hnInput,
         setHnInput,
         handleSearch,
         handleCheckboxChange,
         handleCheckboxChange2,
         handleDateChange,
-        allowDateIds, } = useHook();
+        allowDateIds,
+        data,
+    } = useHook();
     return (
         <div className='min-h-screen bg-[#f0ebf8] pt-[40px]'>
             <form action="\" onSubmit={handleSubmit}>
@@ -256,16 +238,16 @@ export default function page() {
                                 <label className='text-xl' htmlFor="">ประวัติการเเพ้ยา:</label>
                             </div>
                             <div className='mt-[10px] pl-[10px]'>
-                                {HDA.map((hda) => (
-                                    <div key={hda.id} className='xl:flex xl:items-center'>
+                                {data.filter(ma => ma.choice_type_id === 1).map(ma => (
+                                    <div key={ma.id} className='xl:flex xl:items-center'>
                                         <input className='mr-[5px]'
                                             name='HDA'
-                                            value={hda.hda_name}
-                                            checked={field.HDA === String(hda.hda_name)}
+                                            value={ma.id}
+                                            checked={field.HDA === String(ma.id)}
                                             onChange={handleChange}
                                             type="radio" />
-                                        <label className='mr-[10px]'>{hda.hda_name}</label>
-                                        {String(hda.hda_name) === "เคย" && field.HDA === "เคย" && (
+                                        <label className='mr-[10px]'>{ma.choice_name}</label>
+                                        {String(ma.id) === "1" && field.HDA === "1" && (
                                             <div>
                                                 <label htmlFor="">ชื่อยาที่เคยเเพ้:</label>
                                                 <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full lg:w-[507px] xl:w-[460px] bg-white mr-[5px]'
@@ -278,7 +260,6 @@ export default function page() {
                                         )}
                                     </div>
                                 ))}
-
                             </div>
 
                         </div>
@@ -289,16 +270,16 @@ export default function page() {
                                 <label className='text-xl' htmlFor="">HIGH RISK:</label>
                             </div>
                             <div className='mt-[10px] pl-[10px]'>
-                                {HR.map((hr) => (
+                                {data.filter(hr => hr.choice_type_id === 2).map(hr => (
                                     <div key={hr.id} className='xl:flex xl:items-center'>
                                         <input className='mr-[5px]'
                                             name='HR'
-                                            value={hr.hr_name}
+                                            value={hr.id}
                                             onChange={handleChange}
-                                            checked={field.HR === String(hr.hr_name)}
+                                            checked={field.HR === String(hr.id)}
                                             type="radio" />
-                                        <label className='mr-[10px]' htmlFor="HR">{hr.hr_name}</label>
-                                        {String(hr.hr_name) === "ใช่" && field.HR === "ใช่" && (
+                                        <label className='mr-[10px]' htmlFor="HR">{hr.choice_name}</label>
+                                        {String(hr.id) === "4" && field.HR === "4" && (
                                             <div>
                                                 <label htmlFor="">ระบุ:</label>
                                                 <input className='border-gray-400 border p-1 ml-[5px] rounded-lg w-full lg:w-[580px] xl:w-[570px] bg-white'
@@ -306,12 +287,11 @@ export default function page() {
                                                     value={field.HR_other}
                                                     onChange={handleChange}
                                                     type="text"
-                                                    placeholder='กรุณาระบุ'/>
+                                                    placeholder='กรุณาระบุ' />
                                             </div>
                                         )}
                                     </div>
                                 ))}
-
                             </div>
                         </div>
 
@@ -321,15 +301,15 @@ export default function page() {
                                     <label className='text-xl' htmlFor="">แนะนำการเจาะน้ำคร่ำตรวจโครโมโซม:</label>
                                 </div>
                                 <div className='mt-[10px] pl-[10px]'>
-                                    {amnio.map((amnio) => (
+                                    {data.filter(amnio => amnio.choice_type_id === 3).map(amnio => (
                                         <div key={amnio.id}>
                                             <input className='mr-[5px]'
                                                 name='amnio_for_karyotype'
-                                                value={amnio.amnio_name} 
+                                                value={amnio.id}
                                                 onChange={handleChange}
-                                                 checked={field.amnio_for_karyotype === String(amnio.amnio_name)}
+                                                checked={field.amnio_for_karyotype === String(amnio.id)}
                                                 type="radio" />
-                                            <label className='mr-[10px]' htmlFor="amnio_for_karyotype">{amnio.amnio_name}</label>
+                                            <label className='mr-[10px]' htmlFor="amnio_for_karyotype">{amnio.choice_name}</label>
                                         </div>
                                     ))}
                                 </div>
@@ -484,17 +464,17 @@ export default function page() {
                                 <label className='text-xl' htmlFor="">PCR</label>
                             </div>
                             <div className='pl-[10px] mt-[10px]'>
-                                {pcr.map((Pcr) => (
+                                {data.filter(Pcr => Pcr.choice_type_id === 4).map(Pcr => (
                                     <div key={Pcr.id} className='xl:flex xl:items-center'>
                                         <input
                                             type="radio"
                                             name='pcr'
-                                            value={Pcr.pcr_name}
+                                            value={Pcr.id}
                                             onChange={handleChange}
-                                            checked={field.pcr === String(Pcr.pcr_name)}
+                                            checked={field.pcr === String(Pcr.id)}
                                         />
-                                        <label className='ml-[5px] mr-[5px]' htmlFor="pcr">{Pcr.pcr_name}</label>
-                                        {String(Pcr.pcr_name) === "ใช่" && field.pcr === "ใช่" && (
+                                        <label className='ml-[5px] mr-[5px]' htmlFor="pcr">{Pcr.choice_name}</label>
+                                        {String(Pcr.id) === "9" && field.pcr === "9" && (
                                             <div>
                                                 <label htmlFor="">ระบุ</label>
                                                 <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
@@ -514,16 +494,16 @@ export default function page() {
                                 <label className='text-xl' htmlFor="">Cordo</label>
                             </div>
                             <div className='pl-[10px] mt-[10px]'>
-                                {cordo.map((cordo) => (
+                                {data.filter(cordo => cordo.choice_type_id === 5).map(cordo => (
                                     <div key={cordo.id} className='xl:flex xl:items-center'>
                                         <input
                                             type="radio"
                                             name='cordo'
-                                            value={cordo.cordo_name}
+                                            value={cordo.id}
                                             onChange={handleChange}
-                                            checked={field.cordo === String(cordo.cordo_name)} />
-                                        <label className='ml-[5px] mr-[5px]' htmlFor="cordo">{cordo.cordo_name}</label>
-                                        {String(cordo.cordo_name) === "ใช่" && field.cordo === "ใช่" && (
+                                            checked={field.cordo === String(cordo.id)} />
+                                        <label className='ml-[5px] mr-[5px]' htmlFor="cordo">{cordo.choice_name}</label>
+                                        {String(cordo.id) === "11" && field.cordo === "11" && (
                                             <div>
                                                 <label htmlFor="cordo_tr">ผลตรวจ</label>
                                                 <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
@@ -546,15 +526,15 @@ export default function page() {
                                 </div>
 
                                 <div className='mt-[10px] flex gap-[20px]'>
-                                    {PG.map((pg) => (
-                                        <div key={pg.id}>
-                                            <input name='PG' 
-                                            value={pg.PG_name} 
-                                            onChange={handleChange} 
-                                            type="radio" 
-                                            checked={field.PG === String(pg.PG_name)} 
-                                             />
-                                            <label className='ml-[5px]' htmlFor="PG">{pg.PG_name}</label>
+                                    {data.filter(abortion => abortion.choice_type_id === 6).map(abortion => (
+                                        <div key={abortion.id}>
+                                            <input name='PG'
+                                                value={abortion.id}
+                                                onChange={handleChange}
+                                                type="radio"
+                                                checked={field.PG === String(abortion.id)}
+                                            />
+                                            <label className='ml-[5px]' htmlFor="PG">{abortion.choice_name}</label>
                                         </div>
                                     ))}
                                 </div>
@@ -592,17 +572,17 @@ export default function page() {
                                 <label className='text-xl' htmlFor="">ในระหว่างตั้งครรภ์:</label>
                             </div>
                             <div className='pl-[10px] mt-[10px]'>
-                                {duringPregnancy.map((duringPregnancy) => (
-                                    <div key={duringPregnancy.id} className='pt-[5px]'>
+                                {data.filter(tdap => tdap.choice_type_id === 7).map(tdap => (
+                                    <div key={tdap.id} className='pt-[5px]'>
                                         <input
                                             type="radio"
                                             name="during_pregnancy"
-                                            value={duringPregnancy.during_pregnancy_name}
+                                            value={tdap.id}
                                             onChange={handleChange}
-                                            checked={field.during_pregnancy === String(duringPregnancy.during_pregnancy_name)}
+                                            checked={field.during_pregnancy === String(tdap.id)}
                                         />
-                                        <label className='ml-[5px]' htmlFor="">{duringPregnancy.during_pregnancy_name}</label>
-                                        {String(duringPregnancy.during_pregnancy_name) === "ฉีดวัคซีน" && field.during_pregnancy === "ฉีดวัคซีน" && (
+                                        <label className='ml-[5px]' htmlFor="">{tdap.choice_name}</label>
+                                        {String(tdap.id) === "14" && field.during_pregnancy === "14" && (
                                             <div className=' grid grid-cols-1 gap-[10px] mt-[10px] mb-[10px] xl:ml-[20px] xl:mt-[0px] xl:mb-[0px]'>
                                                 <div>
                                                     <label htmlFor="during_pregnancy_round[]">ครั้งที่1:</label>
@@ -627,16 +607,16 @@ export default function page() {
                                 <label className='text-xl' htmlFor="">การกระตุ้นวัคซีนในครรภ์:</label>
                             </div>
                             <div className='pl-[10px] mt-[10px]'>
-                                {vip.map((vaccination_in_pregnancy) => (
-                                    <div key={vaccination_in_pregnancy.id} className='flex items-center'>
+                                {data.filter(iip => iip.choice_type_id === 8).map(iip => (
+                                    <div key={iip.id} className='flex items-center'>
                                         <input
                                             name='vaccination_in_pregnancy'
-                                            value={vaccination_in_pregnancy.vip_name}
+                                            value={iip.id}
                                             onChange={handleChange}
-                                            checked={field.vaccination_in_pregnancy === String(vaccination_in_pregnancy.vip_name)}
+                                            checked={field.vaccination_in_pregnancy === String(iip.id)}
                                             type="radio" />
-                                        <label className='ml-[5px] mr-[5px]' htmlFor="vaccination_in_pregnancy">{vaccination_in_pregnancy.vip_name}</label>
-                                        {String(vaccination_in_pregnancy.vip_name) === "กระตุ้นครรภ์นี้" && field.vaccination_in_pregnancy === "กระตุ้นครรภ์นี้" && (
+                                        <label className='ml-[5px] mr-[5px]' htmlFor="vaccination_in_pregnancy">{iip.choice_name}</label>
+                                        {String(iip.id) === "16" && field.vaccination_in_pregnancy === "16" && (
                                             <div>
                                                 <label htmlFor="">วันที่:</label>
                                                 <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]'
@@ -676,28 +656,27 @@ export default function page() {
                                 <label className='text-xl' htmlFor="">กลุ่มสัมพันธ์ เเละ ฟังผลเลือด:</label>
                             </div>
                             <div className=' pl-[10px]'>
-                                {RgAbTr.map((item) => {
+                                {data.filter(bti => bti.choice_type_id === 9).map(bti => {
                                     // แสดงเฉพาะ id ที่อยากให้มีช่องวันที่
                                     return (
-                                        <div key={item.id} className='xl:flex xl:items-center'>
+                                        <div key={bti.id} className='xl:flex xl:items-center'>
                                             <input
                                                 className='xl:mt-[10px]'
                                                 type="checkbox"
-                                                value={item.RgAbTr_name}
-                                                checked={field.relationship_group_and_blood_test_results.includes(String(item.RgAbTr_name))}
+                                                value={bti.id}
                                                 onChange={handleCheckboxChange}
                                             />
-                                            <label className="ml-[5px] xl:mt-[10px]">{item.RgAbTr_name}</label>
+                                            <label className="ml-[5px] xl:mt-[10px]">{bti.choice_name}</label>
 
                                             {/* โชว์ช่องวันที่เฉพาะ id ที่อยู่ใน allowDateIds */}
-                                            {allowDateIds.includes(String(item.id)) &&
-                                                field.relationship_group_and_blood_test_results.includes(String(item.id)) && (
+                                            {allowDateIds.includes(String(bti.id)) &&
+                                                field.relationship_group_and_blood_test_results.includes(String(bti.id)) && (
                                                     <div className='xl:mt-[10px]'>
                                                         <label>วันที่</label>
                                                         <input
                                                             type="date"
-                                                            value={field.relationship_group_and_blood_test_results_date[item.id] || ""}
-                                                            onChange={(e) => handleDateChange(e, item.id)}
+                                                            value={field.relationship_group_and_blood_test_results_date[bti.id] || ""}
+                                                            onChange={(e) => handleDateChange(e, bti.id)}
                                                             className="border-gray-400 border p-1 rounded-lg bg-white ml-[5px]"
                                                         />
                                                     </div>
@@ -713,38 +692,39 @@ export default function page() {
                                 <div className='bg-gray-100 border-b-2 border-gray-300 w-full p-[10px] pl-[20px] pt-[15px]'>
                                     <label className='text-xl' htmlFor="">ตรวจเต้านม,หัวนม:</label>
                                 </div>
+
                                 <div className=' pl-[10px]'>
-                                    {BE.map((be) => (
-                                        <div key={be.id}>
+                                    {data.filter(cbe => cbe.choice_type_id === 10).map(cbe => (
+                                        <div key={cbe.id}>
                                             <input
                                                 className='mt-[10px]'
                                                 type="checkbox"
-                                                value={be.BE_name}
+                                                value={cbe.id}
                                                 name="BE"
-                                                checked={field.BE.includes(String(be.BE_name))}
+                                                checked={field.BE.includes(String(cbe.id))}
                                                 onChange={handleCheckboxChange2} // ใช้ฟังก์ชันนี้สำหรับ checkbox
                                             />
-                                            <label className="pl-[5px] xl:mt-[10px]">{be.BE_name}</label>
+                                            <label className="pl-[5px] xl:mt-[10px]">{cbe.choice_name}</label>
 
                                             {/* แสดง radio เฉพาะ id=2 */}
-                                            {String(be.BE_name) === "ไม่ปกติ" && field.BE.includes("ไม่ปกติ") &&
-                                                BEside.map((beSide) => (
-                                                    <div key={beSide.id} className='ml-[20px]'>
+                                            {String(cbe.id) === "24" && field.BE.includes("24") &&
+                                                data.filter(birads => birads.choice_type_id === 11).map(birads => (
+                                                    <div key={birads.id} className='ml-[20px]'>
                                                         <input
                                                             className=''
                                                             type="radio"
-                                                            value={beSide.BEside_name}
+                                                            value={birads.id}
                                                             name="BE_not_normal_side"
-                                                            checked={field.BE_not_normal_side === String(beSide.BEside_name)}
+                                                            checked={field.BE_not_normal_side === String(birads.id)}
                                                             onChange={handleChange}
                                                         />
-                                                        <label className="pl-[5px]">{beSide.BEside_name}</label>
+                                                        <label className="pl-[5px]">{birads.choice_name}</label>
                                                     </div>
                                                 ))
                                             }
 
                                             {/* แสดง input ผลตรวจเฉพาะ id=4 */}
-                                            {String(be.BE_name) === "ANC Pap smear" && field.BE.includes("ANC Pap smear") && (
+                                            {String(cbe.id) === "26" && field.BE.includes("26") && (
                                                 <div className="pl-[20px] xl:pl-[10px] xl:ml-[10px]">
                                                     <label htmlFor="BE_tr">ผลตรวจ</label>
                                                     <input
@@ -768,13 +748,13 @@ export default function page() {
                                 <label className='text-xl' htmlFor="">ได้รับยา:</label>
                             </div>
                             <div className='pl-[10px]'>
-                                {receivedMedicine.map((receivedMedicine) => (
-                                    <div key={receivedMedicine.id} className='mt-[5px]'>
-                                        <input type="radio" 
-                                        name='received_medicine' 
-                                        value={receivedMedicine.received_medicine_name} 
-                                        onChange={handleChange} />
-                                        <label htmlFor="">{receivedMedicine.received_medicine_name}</label>
+                                {data.filter(per_os => per_os.choice_type_id === 12).map(per_os => (
+                                    <div key={per_os.id} className='mt-[5px]'>
+                                        <input type="radio"
+                                            name='received_medicine'
+                                            value={per_os.id}
+                                            onChange={handleChange} />
+                                        <label htmlFor="">{per_os.choice_name}</label>
                                     </div>
                                 ))}
                             </div>
@@ -875,15 +855,15 @@ export default function page() {
                                 <label className='text-xl' htmlFor="">PCR</label>
                             </div>
                             <div className='pl-[10px] mt-[10px]'>
-                                {pcr.map((pcr_husband) => (
+                                {data.filter(pcr_husband => pcr_husband.choice_type_id === 4).map(pcr_husband => (
                                     <div key={pcr_husband.id} className='xl:flex xl:items-center'>
                                         <input
                                             type="radio"
                                             name='pcr_husband'
-                                            value={pcr_husband.pcr_name}
+                                            value={pcr_husband.id}
                                             onChange={handleChange} />
-                                        <label className='ml-[5px] xl:mr-[5px]' htmlFor="pcr_husband">{pcr_husband.pcr_name}</label>
-                                        {String(pcr_husband.pcr_name) === "ใช่" && field.pcr_husband === "ใช่" && (
+                                        <label className='ml-[5px] xl:mr-[5px]' htmlFor="pcr_husband">{pcr_husband.choice_name}</label>
+                                        {String(pcr_husband.id) === "9" && field.pcr_husband === "9" && (
                                             <div>
                                                 <label htmlFor="">ระบุ</label>
                                                 <input className='border border-gray-400 p-1 rounded-lg ml-[5px]'
@@ -904,14 +884,14 @@ export default function page() {
                                 <label className='text-lg' htmlFor="">ฝากครรภ์ตามเกณฑ์</label>
                             </div>
                             <div className='pl-[10px] xl:pl-[5px] mt-[10px]'>
-                                {prenatalCare.map((prenatalCare) => (
-                                    <div key={prenatalCare.id}>
-                                        <input 
-                                        type="radio" 
-                                        name='prenatal_care_according_to_criteria' 
-                                        value={prenatalCare.prenatal_care_name} 
-                                        onChange={handleChange} />
-                                        <label className='ml-[5px]' htmlFor="">{prenatalCare.prenatal_care_name}</label>
+                                {data.filter(anc => anc.choice_type_id === 13).map(anc => (
+                                    <div key={anc.id}>
+                                        <input
+                                            type="radio"
+                                            name='prenatal_care_according_to_criteria'
+                                            value={anc.id}
+                                            onChange={handleChange} />
+                                        <label className='ml-[5px]' htmlFor="">{anc.choice_name}</label>
                                     </div>
                                 ))}
                             </div>
@@ -923,14 +903,14 @@ export default function page() {
                                 <label className='text-lg' htmlFor="">ตรวจสอบความครบถ้วนของบริการ ตามช่วงอายุครรภ์</label>
                             </div>
                             <div className='pl-[10px] mt-[10px]'>
-                                {ga.map((ga) => (
-                                    <div key={ga.id}>
-                                        <input 
-                                        type="radio" 
-                                        name="ga" 
-                                        value={ga.ga_name} 
-                                        onChange={handleChange} />
-                                        <label className='ml-[5px]' htmlFor="">{ga.ga_name}</label>
+                                {data.filter(usg => usg.choice_type_id === 14).map(usg => (
+                                    <div key={usg.id}>
+                                        <input
+                                            type="radio"
+                                            name="ga"
+                                            value={usg.id}
+                                            onChange={handleChange} />
+                                        <label className='ml-[5px]' htmlFor="">{usg.choice_name}</label>
                                     </div>
                                 ))}
                             </div>
@@ -945,24 +925,24 @@ export default function page() {
                             </div>
                             <div className='pl-[5px]'>
                                 <div className='mt-[10px]'>
-                                    <input 
-                                    type="checkbox" 
-                                    name='Rcvd_ref' 
-                                    value="รับRefer"
-                                    onChange={handleChange}/>
+                                    <input
+                                        type="checkbox"
+                                        name='Rcvd_ref'
+                                        value="รับRefer"
+                                        onChange={handleChange} />
                                     <label className='ml-[5px]' htmlFor="">รับRefer</label>
                                 </div>
                                 <div className='pl-[15px] xl:pl-[20px]'>
-                                    {refChoice.map((refChoice) => (
+                                    {data.filter(refChoice => refChoice.choice_type_id === 15).map((refChoice) => (
                                         <div key={refChoice.id} className='xl:flex xl:items-center'>
                                             <input type="radio"
                                                 name='Rcvd_ref_choice'
-                                                value={refChoice.ref_choice_name}
+                                                value={refChoice.id}
                                                 onChange={handleChange}
                                             // checked={field.Rcvd_ref_choice === String(refChoice.id)}
                                             />
-                                            <label className='ml-[5px]' htmlFor="">{refChoice.ref_choice_name}</label>
-                                            {String(refChoice.ref_choice_name) === "ต่างจังหวัด" && field.Rcvd_ref_choice === "ต่างจังหวัด" && (
+                                            <label className='ml-[5px]' htmlFor="">{refChoice.choice_name}</label>
+                                            {String(refChoice.id) === "41" && field.Rcvd_ref_choice === "41" && (
                                                 <div className='pl-[20px] xl:pl-[10px]'>
                                                     <label htmlFor="">รพช/รพสต</label>
                                                     <input className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' name='Rcvd_ref_in_province' value={field.Rcvd_ref_in_province} onChange={handleChange} type="text" />
@@ -981,23 +961,23 @@ export default function page() {
                             </div>
                             <div className='pl-[5px]'>
                                 <div className='mt-[10px]'>
-                                    <input type="checkbox" 
-                                    value="ส่งต่อ" 
-                                    name='Fwd_ref' 
-                                    onChange={handleChange}/>
+                                    <input type="checkbox"
+                                        value="ส่งต่อ"
+                                        name='Fwd_ref'
+                                        onChange={handleChange} />
                                     <label className='ml-[5px]' htmlFor="">ส่งต่อ</label>
                                 </div>
                                 <div className='pl-[15px] xl:pl-[20px]'>
-                                    {refChoice.map((FwdRefChoice) => (
+                                    {data.filter(FwdRefChoice => FwdRefChoice.choice_type_id === 15).map(FwdRefChoice => (
                                         <div key={FwdRefChoice.id} className='xl:flex xl:items-center'>
                                             <input type="radio"
                                                 name='Fwd_ref_choice'
-                                                value={FwdRefChoice.ref_choice_name}
+                                                value={FwdRefChoice.id}
                                                 onChange={handleChange}
                                             // checked={field.Fwd_ref_choice === String(FwdRefChoice.id)}
                                             />
-                                            <label className='ml-[5px]' htmlFor="">{FwdRefChoice.ref_choice_name}</label>
-                                            {String(FwdRefChoice.ref_choice_name) === "ต่างจังหวัด" && field.Fwd_ref_choice === "ต่างจังหวัด" && (
+                                            <label className='ml-[5px]' htmlFor="">{FwdRefChoice.choice_name}</label>
+                                            {String(FwdRefChoice.id) === "41" && field.Fwd_ref_choice === "41" && (
                                                 <div className='pl-[20px] xl:pl-[10px]'>
                                                     <label htmlFor="">รพช/รพสต</label>
                                                     <input name='Fwd_ref_in_province' value={field.Fwd_ref_in_province} onChange={handleChange} className='border-gray-400 border p-1 rounded-lg bg-white ml-[5px]' type="text" />
@@ -1012,11 +992,10 @@ export default function page() {
                     <div className='mt-[20px]'>
                         <button type="submit" className='w-full bg-[#68449c] hover:bg-[#6337a0] p-2 text-white text-md rounded-sm'>บันทึกข้อมูล</button>
                     </div>
+
                 </div>
             </form >
-            {/* {vip.map((vip) => (
-                <div key={vip.id}>{vip.vip_name}</div>
-             ))} */}
+
         </div >
     )
 }
