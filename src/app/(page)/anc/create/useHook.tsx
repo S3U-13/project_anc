@@ -25,135 +25,115 @@ export default function useHook() {
     // if (!data) return <p>Loading...</p>
 
     const [field, setField] = useState({
-        hn_wife: "",
-        name_wife: "",
-        age_wife: "",
-        id_card_wife: "",
-        address: "",
-        tel_wife: "",
-        occupation_wife: "",
-        email_wife: "",
-        weight_wife: "",
-        height_wife: "",
-        bmi_wife: "",
-        bp_systolic: "",
-        bp_diastolic: "",
+        hn: "",
+        patvisit_id: "",
+        patreg_id: "",
         para: "",
         g: "",
         p: "",
         a: "",
         last: "",
         lmp: "",
-        edc: "",
-        GA: "",//  อายุครรภ์
-        HDA: "",//  ประวัติการเเพ้ยา
-        DA: "", //  ชื่อยาที่เเพ้
-        HR: "", //  HIGH RISK
-        HR_other: "", //  HIGH RISK
-        amnio_for_karyotype: "", //  แนะนำการเจาะน้ำคร่ำตรวจโครโมโซม
+        ma_id: "",
+        da_text: "",
+        hr_id: "",
+        hr_text: "",
+        am_id: "",
         gct_1: "",
         gct_2: "",
-        ogtt_1: "",
-        ogtt_2: "",
-        HbsAg: "",
-        VDRL: "",
+        hbsag: "",
+        vdrl_1: "",
         anti_hiv: "",
-        BI_gr: "",
-        Rh: "",
-        Hct: "",
-        OF: "",
-        DCIP: "",
-        MCV: "",
-        MCH: "",
-        Hb_typing: "",
-        pcr: "",
-        pcr_other: "",
-        cordo: "",
-        cordo_tr: "",
-        cordo_other: "",
-        PG: "", //  การตั้งครรภ์
-        Td_num: "", //  วัคซีนบาดทะยัก ก่อนตั้งครรภ์
-        Td_last_date: "",
-        during_pregnancy: "", //ในระหว่างตั้งครรภ์:
-        during_pregnancy_round_1: "",
-        during_pregnancy_round_2: "",
-        during_pregnancy_round_3: "",
-        vaccination_in_pregnancy: "",
-        vaccination_in_pregnancy_date: "",
-        lab_2: "",
+        bl_gr: "",
+        rh: "",
         hct: "",
-        vdrl: "",
+        of: "",
+        dcip: "",
+        mcv: "",
+        mch: "",
+        hb_typing: "",
+        pcr_wife_id: "",
+        pcr_text: "",
+        cordo_id: "",
+        cordo_text: "",
+        cordo_other_text: "",
+        abortion_id: "",
+        td_num: "",
+        td_last_date: "",
+        tdap_id: "",
+        tdap_round_1: "",
+        tdap_round_2: "",
+        tdap_round_3: "",
+        iip_id: "",
+        iip_date: "",
+        lab_2: "",
+        vdrl_2: "",
         h: "",
-        relationship_group_and_blood_test_results: [],
-        relationship_group_and_blood_test_results_date: {},
-        BE: [],
-        BE_not_normal_side: "",
-        BE_tr: "",
-        received_medicine: "",
-        name_husband: "",
-        age_husband: "",
-        id_card_husband: "",
-        hn_husband: "",
-        tel_husband: "",
-        occupation_husband: "",
-        HbsAg_husband: "",
-        VDRL_husband: "",
+        bti_value_1_id: "",
+        bti_value_2_id: "",
+        bti_value_3_id: "",
+        bti_value_4_id: "",
+        bti_value_5_id: "",
+        bti_date: "",
+        cbe_value_1_id: "",
+        cbe_value_2_id: "",
+        cbe_value_3_id: "",
+        cbe_value_4_id: "",
+        birads_id: "",
+        cbe_result: "",
+        per_os_id: "",
+        husband_name: "",
+        husband_age: "",
+        husband_id_card: "",
+        husband_hn: "",
+        husband_tel: "",
+        husband_job: "",
+        hbsag_husband: "",
+        vdrl_husband: "",
         anti_hiv_husband: "",
-        BI_gr_husband: "",
-        Rh_husband: "",
-        Hct_husband: "",
-        OF_husband: "",
-        DCIP_husband: "",
-        MCV_husband: "",
-        MCH_husband: "",
-        Hb_typing_husband: "",
-        pcr_husband: "",
-        pcr_other_husband: "",
-        prenatal_care_according_to_criteria: "",
-        ga: "",
-        Rcvd_ref: "",
-        Rcvd_ref_choice: "",
-        Rcvd_ref_in_province: "",
-        Fwd_ref: "",
-        Fwd_ref_choice: "",
-        Fwd_ref_in_province: "",
+        bl_gr_husband: "",
+        rh_husband: "",
+        hct_husband: "",
+        of_husband: "",
+        dcip_husband: "",
+        mcv_husband: "",
+        mch_husband: "",
+        hb_typing_husband: "",
+        pcr_hus_husband: "",
+        pcr_hus_id: "",
+        anc_id: "",
+        usg_id: "",
+        ref_in_id: "",
+        ref_out_id: "",
+        ref_in_choice_id: "",
+        ref_out_choice_i: "",
+        hos_name: "",
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let existing = JSON.parse(localStorage.getItem("mockData")) || [];
-
-        // ✅ สร้าง anc_no 6 หลักอัตโนมัติ
-        let nextNo = "000001";
-        if (existing.length > 0) {
-            const lastNo = existing[existing.length - 1].anc_no;
-            const newNo = (parseInt(lastNo, 10) + 1).toString().padStart(6, "0");
-            nextNo = newNo;
-        }
-
-        const newData = {
-            ...field,      // ฟิลด์ที่กรอกจากฟอร์ม
-            anc_no: nextNo.toString(), // หมายเลข anc_no
-        };
-
         try {
-            if (newData) {
-                const updatedData = [...existing, newData];
-                localStorage.setItem("mockData", JSON.stringify(updatedData));
+            const response = await fetch(`http://localhost:8000/api/cars`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(field),  // แปลง object เป็น JSON string
+            });
 
-                Swal.fire({
-                    icon: "success",
-                    text: "เพิ่มข้อมูลสำเร็จ",
-                });
-
-                router.push("/anc");
-            } else {
-                Swal.fire({
-                    icon: "warning",
-                    text: "เพิ่มข้อมูลไม่สำเร็จ",
-                });
+            if (!response.ok) {
+                throw new Error("เพิ่มข้อมูลไม่สำเร็จ");
             }
+
+            const data = await response.json();
+
+            Swal.fire({
+                icon: "success",
+                text: "เพิ่มข้อมูลสำเร็จ",
+            });
+
+            router.push("/anc");
         } catch (error) {
             console.error(error);
             Swal.fire({
@@ -162,7 +142,6 @@ export default function useHook() {
             });
         }
     };
-
     const [pat, setPat] = useState([
         {
             hn: "1345798",
@@ -218,7 +197,7 @@ export default function useHook() {
         if (found) {
             setField((prev) => ({
                 ...prev,
-                hn_wife: found.hn || "",
+                hn: found.hn || "",
                 name_wife: `${found.first_name} ${found.last_name}` || "",
                 age_wife: found.age || "",
                 id_card_wife: found.id_card || "",
@@ -234,7 +213,7 @@ export default function useHook() {
         } else {
             alert("ไม่พบข้อมูล");
             setField({
-                hn_wife: "",
+                hn: "",
                 name_wife: "",
                 age_wife: "",
                 id_card_wife: "",
@@ -298,14 +277,17 @@ export default function useHook() {
 
     const allowDateIds = ["18", "19"];
 
-    const handleCheckboxChange = (e) => {
+    const handleCheckboxChange = (e, fieldName) => {
         const { value, checked } = e.target;
-        setField((prev) => {
-            const updated = checked
-                ? [...prev.relationship_group_and_blood_test_results, value]
-                : prev.relationship_group_and_blood_test_results.filter((v) => v !== value);
 
-            return { ...prev, relationship_group_and_blood_test_results: updated };
+        setField((prev) => {
+            const currentValues = Array.isArray(prev[fieldName]) ? prev[fieldName] : [];
+
+            const updated = checked
+                ? [...currentValues, value]
+                : currentValues.filter((v) => v !== value);
+
+            return { ...prev, [fieldName]: updated };
         });
     };
 
@@ -314,23 +296,25 @@ export default function useHook() {
         const { value } = e.target;
         setField((prev) => ({
             ...prev,
-            relationship_group_and_blood_test_results_date: {
-                ...prev.relationship_group_and_blood_test_results_date,
+            bti_date: {
+                ...prev.bti_date,
                 [id]: value,
             },
         }));
     };
 
-    const handleCheckboxChange2 = (e) => {
+    const handleCheckboxChange2 = (e, fieldName) => {
         const { value, checked } = e.target;
-        setField((prev) => {
-            const updated = checked
-                ? [...prev.BE, value]
-                : prev.BE.filter((v) => v !== value);
+        setField(prev => {
+            const currentValues = Array.isArray(prev[fieldName]) ? prev[fieldName] : [];
 
-            return { ...prev, BE: updated };
+            const updated = checked
+                ? [...currentValues, value]       // ถ้าเลือก → push ค่าใหม่
+                : currentValues.filter(v => v !== value); // ถ้า uncheck → ลบออก
+
+            return { ...prev, [fieldName]: updated };
         });
-    };
+    }
 
     return {
         field,
